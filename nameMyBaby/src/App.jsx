@@ -16,27 +16,33 @@ const darkTheme = createTheme(({
   }
 }));
 
-const tealTheme = createTheme({
+const theme = createTheme({
   palette: {
     primary: {
-      light: '#b2dfdb',
-      main: '#00796b',
-      dark: '#004d40',
+      light: '#fefae0',
+      main: '#606c38',
+      dark: '#283618',
+      contrastText: "#fefae0"
+    },
+    secondary: {
+      light: "#fefae0",
+      main: "#dda15e",
+      dark: "#bc6c25",
     }
   },
 })
 
 export default function App() {
   return (
-    <ThemeProvider theme={tealTheme}>
+    <ThemeProvider theme={theme}>
       <SearchAppBar />
       <Grid container spacing={1}>
-        <Grid xs={4}>
-          <TopUnisex />
+        <Grid xs={3}>
           <TopMale />
           <TopFemale />
+          <TopUnisex />
         </Grid>
-        <Grid xs={8}>
+        <Grid xs={9}>
           <NameInfo />
         </Grid>
       </Grid>

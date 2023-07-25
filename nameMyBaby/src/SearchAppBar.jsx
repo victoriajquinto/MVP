@@ -25,12 +25,12 @@ const Search = styled('div')(({ theme }) => ({
   },
 }));
 
-const Advanced = styled(Button)(({ tealTheme }) => ({
+const Advanced = styled(Button)(({ theme }) => ({
   color: 'inherit',
   border: 'primary.light'
 }));
 
-const RNG = styled(Button)(({ tealTheme }) => ({
+const RNG = styled(Button)(({ theme }) => ({
   color: 'inherit',
   border: 'primary.light'
 }));
@@ -64,7 +64,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function SearchAppBar() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, }}>
       <AppBar position="static">
         <Toolbar>
           <IconButton
