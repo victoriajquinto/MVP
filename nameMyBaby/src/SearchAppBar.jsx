@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
+import Button from '@mui/material/Button';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -22,6 +23,16 @@ const Search = styled('div')(({ theme }) => ({
     marginLeft: theme.spacing(1),
     width: 'auto',
   },
+}));
+
+const Advanced = styled(Button)(({ tealTheme }) => ({
+  color: 'inherit',
+  border: 'primary.light'
+}));
+
+const RNG = styled(Button)(({ tealTheme }) => ({
+  color: 'inherit',
+  border: 'primary.light'
 }));
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
@@ -82,6 +93,10 @@ export default function SearchAppBar() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
+          <Box>
+            <Advanced variant='outlined'>Advanced Search</Advanced>
+            <RNG variant='outlined'>Random Name Generator</RNG>
+          </Box>
         </Toolbar>
       </AppBar>
     </Box>
