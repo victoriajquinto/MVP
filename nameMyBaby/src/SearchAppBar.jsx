@@ -9,6 +9,7 @@ import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import Button from '@mui/material/Button';
+import Random from './Random.jsx';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -63,6 +64,21 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchAppBar() {
+  //for Random Modal
+  const [ randomOpen, setRandomOpen ] = useState(false);
+
+  function handleOpenRandom(event) {
+    console.log('click!')
+    setRandomOpen(true);
+  }
+
+  function handleCloseRandom(event) {
+    setRandomOpen(false);
+  }
+
+  //for Advanced Search
+  //create states
+  //create open/close functions
   return (
     <Box sx={{ flexGrow: 1, }}>
       <AppBar position="static">
@@ -95,7 +111,8 @@ export default function SearchAppBar() {
           </Search>
           <Box>
             <Advanced variant='outlined'>Advanced Search</Advanced>
-            <RNG variant='outlined'>Random Name Generator</RNG>
+            <RNG variant='outlined' onClick={event => handleOpenRandom(event)}>Random Name Generator</RNG>
+            <Random randomOpen={randomOpen} handleCloseRandom={handleCloseRandom}/>
           </Box>
         </Toolbar>
       </AppBar>

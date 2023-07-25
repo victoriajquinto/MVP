@@ -6,11 +6,11 @@ import Grid from '@mui/material/Unstable_Grid2';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
-function Etymology() {
+function Languages() {
   return(
     <>
-      <Typography variant="p">
-        Etymology content
+      <Typography variant="body1">
+        Languages content
       </Typography>
     </>
   )
@@ -19,7 +19,7 @@ function Etymology() {
 function Origin() {
   return(
     <>
-      <Typography variant="p">
+      <Typography variant='body1'>
         Origin content
       </Typography>
     </>
@@ -29,7 +29,7 @@ function Origin() {
 function Popularity() {
   return(
     <>
-      <Typography variant="p">
+      <Typography variant='body1'>
         Popularity content
       </Typography>
     </>
@@ -39,8 +39,8 @@ function Popularity() {
 function FamousNamesakes() {
   return(
     <>
-      <Typography variant="p">
-        Famouse Namesakes content
+      <Typography variant='body1'>
+        Famous Namesakes content
       </Typography>
     </>
   )
@@ -67,7 +67,7 @@ export default function NameInfo() {
           <Typography variant='h2'>Name</Typography>
         </Grid>
         <Grid xs={7}>
-          <Etymology />
+          <Languages />
         </Grid>
         <Grid xs={1}>
           <FavoriteBorderIcon />
