@@ -1,16 +1,19 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import { Dialog, DialogTitle, DialogContent, Select, MenuItem, FormControl, InputLabel, IconButton, DialogActions, Grid } from '@mui/material';
 import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined';
-import RNG from '../util/RNG.js';
+import handleFetchName from '../state/Name/nameActions.js';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function Random({randomOpen, handleCloseRandom}) {
   const [ gender, setGender ] = useState('');
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state);
+  console.log('state:', state);
 
-  function handleChange(event) {
-    console.log(event.target.value);
-    setGender(event.target.value);
-    RNG(gender);
+  async function handleChange(event) {
+    const selectedGender = event.target.value;
+    setGender(selectedGender);
+    await dispatch(handleFetchName(selectedGender));
     setGender('');
   }
 

@@ -5,6 +5,8 @@ import TopMale from './TopMale.jsx';
 import TopFemale from './TopFemale.jsx';
 import NameInfo from './NameInfo.jsx';
 import Grid from '@mui/material/Unstable_Grid2';
+import { useSelector, useDispatch } from 'react-redux';
+
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 

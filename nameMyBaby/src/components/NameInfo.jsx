@@ -5,6 +5,8 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Unstable_Grid2';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { useDispatch, useSelector } from 'react-redux';
+import handleFetchInfo from '../state/Info/infoActions.js';
 
 function Languages() {
   return(
@@ -57,6 +59,16 @@ function SimilarNames() {
 }
 
 export default function NameInfo() {
+  const dispatch = useDispatch();
+  const name = useSelector(state => state.name.name);
+  // const usages = useSelector(state => state.info.info.info[0].usages)
+  // console.log('usages in NameInfo', usages);
+
+  
+  useEffect(()=>{
+    dispatch(handleFetchInfo(name));
+  },[dispatch, name]);
+
   return(
     <Box sx={{
       backgroundColor: 'secondary.main',
@@ -64,7 +76,7 @@ export default function NameInfo() {
     }}>
       <Grid container spacing={1}>
         <Grid xs={4}>
-          <Typography variant='h2'>Name</Typography>
+          <Typography variant='h2'>{name}</Typography>
         </Grid>
         <Grid xs={7}>
           <Languages />
