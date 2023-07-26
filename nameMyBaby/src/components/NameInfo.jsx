@@ -9,10 +9,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import handleFetchInfo from '../state/Info/infoActions.js';
 
 function Languages() {
+  const usages = useSelector(state => state.info.info.info[0].usages) || null;
+  // console.log('usages in NameInfo', usages);
+  const languages = usages.map(use => {return use.usage_full}).join(', ')|| null;
+  // console.log('languages', languages);
   return(
     <>
-      <Typography variant="body1">
-        Languages content
+      <Typography variant="body1" id='usage'>
+        Usage: {languages}
       </Typography>
     </>
   )
@@ -49,10 +53,13 @@ function FamousNamesakes() {
 }
 
 function SimilarNames() {
+  const related = useSelector(state => state.info.info.related.names);
+  console.log('related', related);
+  const similar = related.join(', ');
   return(
     <>
-      <Typography variant="p">
-        Similar Names content
+      <Typography variant="body1">
+        {similar}
       </Typography>
     </>
   )
@@ -61,10 +68,7 @@ function SimilarNames() {
 export default function NameInfo() {
   const dispatch = useDispatch();
   const name = useSelector(state => state.name.name);
-  // const usages = useSelector(state => state.info.info.info[0].usages)
-  // console.log('usages in NameInfo', usages);
 
-  
   useEffect(()=>{
     dispatch(handleFetchInfo(name));
   },[dispatch, name]);
@@ -74,7 +78,11 @@ export default function NameInfo() {
       backgroundColor: 'secondary.main',
       marginTop: 2,
     }}>
-      <Grid container spacing={1}>
+      <Grid
+        container
+        direction='row'
+        justifyContent="center"
+        alignItems="center">
         <Grid xs={4}>
           <Typography variant='h2'>{name}</Typography>
         </Grid>

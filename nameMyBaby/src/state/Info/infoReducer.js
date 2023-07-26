@@ -1,6 +1,25 @@
 import { HANDLE_SET_INFO } from './infoActions.js'
 
-export default function InfoReducer(state = {}, action) {
+const initialState = {
+  info:{
+    info: [
+      {
+          name: "Vicky",
+          gender: "f",
+          usages: [
+              {
+                  usage_code: "eng",
+                  usage_full: "English",
+                  usage_gender: "f"
+              }
+          ]
+      }
+  ],
+  related: {names: ["Amy", "Kathy"]}
+  }
+}
+
+export default function InfoReducer(state = initialState, action) {
   switch(action.type) {
     case HANDLE_SET_INFO:
       // console.log('Previous state:', state);

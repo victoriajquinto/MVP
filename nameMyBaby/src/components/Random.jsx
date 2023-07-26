@@ -15,6 +15,7 @@ export default function Random({randomOpen, handleCloseRandom}) {
     setGender(selectedGender);
     await dispatch(handleFetchName(selectedGender));
     setGender('');
+    handleCloseRandom();
   }
 
   return (
