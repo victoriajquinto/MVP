@@ -7,6 +7,7 @@ export default function RNG(selected) {
     params: {
       key: "vi359119907",
       gender: selected,
+      usage: 'eng',
       number: 1
     }
   }).then(response => {

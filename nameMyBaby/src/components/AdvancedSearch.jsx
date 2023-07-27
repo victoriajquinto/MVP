@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Dialog, DialogTitle, DialogContent, Select, MenuItem, FormControl, InputLabel, IconButton, DialogActions, Grid } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, Select, MenuItem, FormControl, InputLabel, IconButton, DialogActions, Grid, Typography } from '@mui/material';
 import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined';
 import handleFetchName from '../state/Name/nameActions.js';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,7 +12,7 @@ export default function AdvancedSearch({advancedOpen, handleCloseAdvanced}) {
       <Grid container spacing={1}>
         <Grid>
           <DialogTitle>
-          You thought you had a say in your baby's name? Think again.
+            DENIED.
           </DialogTitle>
         </Grid>
         <Grid>
@@ -23,6 +23,12 @@ export default function AdvancedSearch({advancedOpen, handleCloseAdvanced}) {
         </DialogActions>
         </Grid>
       </Grid>
+
+      <DialogContent>
+        <Typography variant='body1'>You thought you had </Typography>
+        <Typography variant='body1'>a say on this matter?</Typography>
+        <Typography variant='body1'>Think again.</Typography>
+      </DialogContent>
     </Dialog>
   )
 }

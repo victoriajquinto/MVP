@@ -11,7 +11,10 @@ export default defineConfig({
       '/topten': 'http://localhost:3000',
       '/popularity': 'http://localhost:3000',
     }
-  }
+  },
+  // optimizeDeps: {
+  //   exclude: ['isomorphic-fetch'],
+  // },
 });
 
 

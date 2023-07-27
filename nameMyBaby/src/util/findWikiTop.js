@@ -1,23 +1,36 @@
-import axios from 'axios';
-import cheerio from 'cheerio';
+// import axios from 'axios';
+// import cheerio from 'cheerio';
 
-// Function to fetch and scrape the Wikipedia page
-const findWikiTop = async (url) => {
-  try {
-    const response = await axios.get(url);
-    const html = response.data;
-    const $ = cheerio.load(html);
+// // Function to fetch and scrape the Wikipedia page
+// const findWikiTop = async (url) => {
+//   try {
+//     const response = await axios.get(url);
+//     const html = response.data;
+//     const $ = cheerio.load(html);
 
-    // Extract the top section content
-    const topSection = $('body > #content > #bodyContent > #mw-content-text > .mw-parser-output > p')
-      .first()
-      .text();
+//     // Extract the top section content
+//     const topSection = $('body > #content > #bodyContent > #mw-content-text > .mw-parser-output > p')
+//       .first()
+//       .text();
 
-    return topSection;
-  } catch (error) {
-    console.error('Error scraping Wikipedia:', error);
-    return null;
-  }
-};
+//     return topSection;
+//   } catch (error) {
+//     console.error('Error scraping Wikipedia:', error);
+//     return null;
+//   }
+// };
 
-export default findWikiTop;
+// export default findWikiTop;
+
+import wiki from 'wikijs';
+
+
+export default function scrapeWikiSummary(phrase){
+  let query = phrase || 'albert einstein';
+  return wiki()
+	.page(query)
+	.then((page) =>
+		{page.summary()}
+)
+
+}

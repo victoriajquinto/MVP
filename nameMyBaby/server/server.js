@@ -31,15 +31,18 @@ app.get('/popularity', async(req, res) => {
 
 app.get('/topten', async(req, res) => {
   try {
+    const year = parseInt(req.query.year);
     const gender = req.query.gender.toUpperCase();
-    console.log('req in topten server path', req);
-    const queryString = 'SELECT name FROM popularity WHERE (year = 2022 AND gender = $1) ORDER BY count DESC LIMIT 10;';
-    const data = await db.query(queryString, [gender])
+    const params = [year, gender];
+    console.log('req in topten server path', req.query);
+    const queryString = 'SELECT name FROM popularity WHERE (year = $1 AND gender = $2) ORDER BY count DESC LIMIT 10;';
+    const data = await db.query(queryString, params);
     res.status(200).send(data);
   } catch (error) {
     console.log('error in pop get request', error);
     res.status(400).send(error);
   }
+
 });
 
 app.listen(port, () => {

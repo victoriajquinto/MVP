@@ -1,22 +1,46 @@
 import { useState, useEffect } from 'react';
-import { Box, List, ListItem} from '@mui/material';
-
+import { Box, List, ListItem, FormControl, Input, FormHelperText} from '@mui/material';
 import Typography from '@mui/material/Typography';
+import sendTopTen from '../util/toptenAPI.js';
+
 
 export default function TopMale() {
+  const [data, setData] = useState([]);
+  const [year, setYear] = useState(2022);
 
-  let data = ["Olivia", 'Emma', "Charlotte", "Amelia", 'Sophia', 'Isabella', 'Ava', 'Mia', 'Evelyn', 'Luna'];
-  let list = data.map((name, index) => {return (<ListItem><Typography variant='body1'>{index+1}. {name}</Typography ></ListItem>)});
+  function handleYear(event) {
+    const selectedYear = event.target.value || 2022;
+    setYear(selectedYear);
+  }
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const result = await sendTopTen(year, "M");
+        setData(result);
+      } catch (error) {
+        console.log("error in fetchData: ", error);
+      }
+    }
+
+    fetchData();
+  }, [year]);
+
+  let list = data.map((object, index) => {return (<ListItem><Typography variant='body1'>{index+1}. {object.name}</Typography ></ListItem>)});
 
   return(
     <Box sx={{
       width: 300,
-      height: 450,
+      height: 500,
       backgroundColor: 'primary.light',
       marginTop: 2,
     }}>
       <Typography variant='h6'>
-        Top 10 Male Names of 2022
+        Top US 10 Male Names of:
+        <FormControl>
+          <Input id="my-input" aria-describedby="my-helper-text" placeholder='2022' onChange={handleYear}/>
+          <FormHelperText id="my-helper-text">Type in a year! YYYY. Range: 1880 to 2022</FormHelperText>
+        </FormControl>
       </Typography>
       <List>
         {list}

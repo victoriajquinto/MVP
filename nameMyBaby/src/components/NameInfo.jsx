@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import handleFetchInfo from '../state/Info/infoActions.js';
 import popularity from '../util/PopularityAPI.js';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+// import scrapeWikiSummary from '../util/findWikiTop.js';
+
 
 export function Languages() {
   const usages = useSelector(state => state.info.info.info[0].usages) || null;
@@ -25,10 +27,36 @@ export function Languages() {
 }
 
 export function Origin() {
+  // const name = useSelector(state => state.name.name);
+  // const [data, setData] = useState('');
+
+  // useEffect(()=>{
+  //   async function fetchWikiSummary() {
+  //     try {
+  //       const result = await scrapeWikiSummary(`${name} (name)`);
+  //       setData(result)
+  //     } catch (error) {
+  //       console.log("error in fetchwikisummary", error);
+  //     }
+  //   }
+  //   fetchWikiSummary();
+  // }, [name]);
+
   return(
     <>
       <Typography variant='body1'>
         Origin content
+      </Typography>
+      {/* {data} */}
+    </>
+  )
+}
+
+export function FamousNamesakes() {
+  return(
+    <>
+      <Typography variant='body1'>
+        Famous Namesakes content
       </Typography>
     </>
   )
@@ -52,7 +80,7 @@ export function Popularity() {
   }, [name]);
 
   return(
-    <>hello
+    data ? (<>
       <ResponsiveContainer width="100%" height="100%">
         <LineChart
           width={100}
@@ -73,17 +101,8 @@ export function Popularity() {
           <Line type="monotone" dataKey="count" stroke="#8884d8" activeDot={{ r: 8 }} />
         </LineChart>
       </ResponsiveContainer>
-    </>
-  )
-}
+    </>):(<Typography variant='body1'> No children in the US named {name} between the ancient past and 2022</Typography>)
 
-export function FamousNamesakes() {
-  return(
-    <>
-      <Typography variant='body1'>
-        Famous Namesakes content
-      </Typography>
-    </>
   )
 }
 
@@ -135,7 +154,6 @@ export default function NameInfo() {
               Origin
             </Typography>
             <Origin />
-
           </Box>
           <Box>
             <Typography variant='h4'>
