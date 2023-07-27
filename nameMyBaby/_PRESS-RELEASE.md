@@ -27,16 +27,16 @@ This easy-to-use app is designed for expectant parents who want to choose a uniq
 As soon as you make your pregnancy announcements, the first question friends and family will ask you is "Any names?". You're tired of saying, "Not yet," but you're also too busy to put in the time to think of a name.
 
 ## Solution ##
-Name My Baby is designed to make this decision easy. You can search names by letter or lore and view popularity metrics in the US. You can also look at famous namesakes so you can tell your child they were named after royalty rather than a video game character (even if the latter is the truth).
+Name My Baby is designed to make this decision easy by generating a random baby name for you! Simply select a gender to get started.
 
 ## Quote from You ##
 Use this app instead of calling your baby "it".
 
 ## How to Get Started ##
-Visit the website, type in some optional filters or criteria, or randomly generate a name.
+Visit the website and randomly generate a name.
 
 ## Customer Quote ##
-"A beautiful-ish design without the shilling and the ads." - anonymous
+"A simple design without the shilling and the ads." - anonymous
 
 ## Closing and Call to Action ##
 Don't wait! Name your baby today!
