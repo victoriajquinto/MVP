@@ -29,7 +29,6 @@ export default function TopFemale() {
 
   let list = data.map((object, index) => {return (<ListItem><Typography variant='body1' color="#524434">{index+1}. {object.name}</Typography ></ListItem>)});
 
-
   return(
     <Box sx={{
       maxWidth: 300,
@@ -42,7 +41,7 @@ export default function TopFemale() {
       color: 'info.main'
     }}>
       <Typography variant='h6'>
-        Top US 10 Female Names of
+        Top US 10 Girl Names of
         <Box sx={{pl: 1, maxWidth: '280px'}}>
           <FormControl>
             <Input id="my-input" aria-describedby="my-helper-text" placeholder='2022' onChange={handleYear}/>

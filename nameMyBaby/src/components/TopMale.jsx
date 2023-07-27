@@ -40,7 +40,7 @@ export default function TopMale() {
       color: 'info.main'
     }}>
       <Typography variant='h6'>
-        Top US 10 Male Names of
+        Top US 10 Boy Names of
 
         <Box sx={{pl: 1}}>
           <FormControl>

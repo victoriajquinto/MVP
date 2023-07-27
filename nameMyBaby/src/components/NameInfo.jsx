@@ -55,7 +55,7 @@ export function Origin() {
         }
 
         if(result.includes('may refer to:')){
-          result = "No origin information available."
+          result = "No information available."
         }
 
         let earl = `https://en.wikipedia.org/wiki/${successfulEndpoint}`;
@@ -69,26 +69,29 @@ export function Origin() {
   }, [name]);
 
   return data ? (
-    <>
+    <Box sx={{pl: 1}}>
       <Typography variant='body1'>
       {data}
       </Typography>
       <Typography variant='body1'>
-        For more information or to see related wikipedia articles, please visit <Link href={url} underline="hover">{url}
-        </Link>.
+        To learn more, please visit <Link href={url} underline="hover">{url}</Link>.
       </Typography>
-
-    </>
+      <Typography variant='body2' color= '#524434'>
+        Source: Wikipedia
+      </Typography>
+    </Box>
   ): (
-    <>
+    <Box sx={{pl: 1}}>
       <Typography variant='body1'>
-      No origin data available.
+      No information available.
       </Typography>
       <Typography variant='body1'>
-        For more information, please visit <Link href={url} underline="hover">{url}
-        </Link>.
+        To learn more, please visit <Link href={url} underline="hover">{url}</Link>.
       </Typography>
-    </>
+      <Typography variant='body2' color= '#524434'>
+        Source: Wikipedia
+      </Typography>
+    </Box>
   )
 }
 
@@ -143,7 +146,7 @@ export function Popularity() {
           margin={{
             top: 5,
             right: 30,
-            left: 20,
+            left: 0,
             bottom: 5,
           }}
         >
@@ -165,11 +168,11 @@ export function SimilarNames() {
   // console.log('related', related);
   const similar = related.join(', ');
   return(
-    <>
+    <Box sx={{pl: 1}}>
       <Typography variant="body1">
         {similar}
       </Typography>
-    </>
+    </Box>
   )
 }
 
@@ -213,10 +216,10 @@ export default function NameInfo() {
           direction='row'
           justifyContent="center"
           alignItems="center">
-          <Grid xs={4} color='info.main'>
+          <Grid xs={3} color='info.main'>
             <Typography variant='h2'>{name}</Typography>
           </Grid>
-          <Grid xs={7}>
+          <Grid xs={8}>
             <Languages />
           </Grid>
           <Grid xs={1}>
@@ -229,12 +232,9 @@ export default function NameInfo() {
         <Box>
           <Box sx={{p: 1}}>
             <Typography variant='h5' color= '#524434'>
-              Origin
+              Description
             </Typography>
             <Origin />
-            <Typography variant='body2' color= '#524434'>
-              Source: Wikipedia
-            </Typography>
           </Box>
           <hr></hr>
           {/* <Box>
