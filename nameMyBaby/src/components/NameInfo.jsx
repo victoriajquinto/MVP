@@ -8,9 +8,9 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useDispatch, useSelector } from 'react-redux';
 import handleFetchInfo from '../state/Info/infoActions.js';
 import popularity from '../util/PopularityAPI.js';
-// import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-function Languages() {
+export function Languages() {
   const usages = useSelector(state => state.info.info.info[0].usages) || null;
   // console.log('usages in NameInfo', usages);
   const languages = usages.map(use => {return use.usage_full}).join(', ')|| null;
@@ -24,7 +24,7 @@ function Languages() {
   )
 }
 
-function Origin() {
+export function Origin() {
   return(
     <>
       <Typography variant='body1'>
@@ -34,32 +34,29 @@ function Origin() {
   )
 }
 
-function Popularity() {
+export function Popularity() {
   const name = useSelector(state => state.name.name);
-  async function getPopData() {
-    try {
-      return await popularity(name);
-    } catch (error) {
-      console.log("error in getPopData: ", error);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const result = await popularity(name);
+        setData(result);
+      } catch (error) {
+        console.log("error in fetchData: ", error);
+      }
     }
-  }
-  const resultPromise = (name) => new Promise((resolve, reject) => {
-    getPopData(name)
-      .then(resolve)
-      .catch(reject);
-  });
-  let data = resultPromise()
-  .then(result => {
-    console.log(result);
-    return result;
-  }).catch(error => console.log("error in resultPromise: ", error));
+
+    fetchData();
+  }, [name]);
 
   return(
-    <>
-      {/* <ResponsiveContainer width="100%" height="100%">
+    <>hello
+      <ResponsiveContainer width="100%" height="100%">
         <LineChart
-          width={500}
-          height={300}
+          width={100}
+          height={100}
           data={data}
           margin={{
             top: 5,
@@ -75,12 +72,12 @@ function Popularity() {
           <Legend />
           <Line type="monotone" dataKey="count" stroke="#8884d8" activeDot={{ r: 8 }} />
         </LineChart>
-      </ResponsiveContainer> */}
+      </ResponsiveContainer>
     </>
   )
 }
 
-function FamousNamesakes() {
+export function FamousNamesakes() {
   return(
     <>
       <Typography variant='body1'>
@@ -90,7 +87,7 @@ function FamousNamesakes() {
   )
 }
 
-function SimilarNames() {
+export function SimilarNames() {
   const related = useSelector(state => state.info.info.related.names);
   // console.log('related', related);
   const similar = related.join(', ');
@@ -112,52 +109,56 @@ export default function NameInfo() {
   },[dispatch, name]);
 
   return(
-    <Box sx={{
-      backgroundColor: 'secondary.main',
-      marginTop: 2,
-    }}>
-      <Grid
-        container
-        direction='row'
-        justifyContent="center"
-        alignItems="center">
-        <Grid xs={4}>
-          <Typography variant='h2'>{name}</Typography>
+    <>
+      <Box sx={{
+        backgroundColor: 'secondary.main',
+        marginTop: 2,
+      }}>
+        <Grid
+          container
+          direction='row'
+          justifyContent="center"
+          alignItems="center">
+          <Grid xs={4}>
+            <Typography variant='h2'>{name}</Typography>
+          </Grid>
+          <Grid xs={7}>
+            <Languages />
+          </Grid>
+          <Grid xs={1}>
+            <FavoriteBorderIcon />
+          </Grid>
         </Grid>
-        <Grid xs={7}>
-          <Languages />
-        </Grid>
-        <Grid xs={1}>
-          <FavoriteBorderIcon />
-        </Grid>
-      </Grid>
-      <Box>
         <Box>
-          <Typography variant='h4'>
-            Origin
-          </Typography>
-          <Origin />
+          <Box>
+            <Typography variant='h4'>
+              Origin
+            </Typography>
+            <Origin />
 
-        </Box>
-        <Box>
-          <Typography variant='h4'>
-            U.S. Popularity Over Time
-          </Typography>
-          <Popularity />
-        </Box>
-        <Box>
-          <Typography variant='h4'>
-            Famous Namesakes
-          </Typography>
-          <FamousNamesakes />
-        </Box>
-        <Box>
-          <Typography variant='h4'>
-            Similar Names
-          </Typography>
-          <SimilarNames />
+          </Box>
+          <Box>
+            <Typography variant='h4'>
+              Famous Namesakes
+            </Typography>
+            <FamousNamesakes />
+          </Box>
+          <Box>
+            <Typography variant='h4'>
+              Similar Names
+            </Typography>
+            <SimilarNames />
+          </Box>
+          <Box sx={{
+             height:400, width: 400}}>
+            <Typography variant='h4'>
+              U.S. Popularity Over Time
+            </Typography>
+            <Popularity />
+          </Box>
         </Box>
       </Box>
-    </Box>
+    </>
+
   )
 }
