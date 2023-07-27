@@ -2,6 +2,7 @@ import express from 'express';
 import morgan from 'morgan';
 import {db} from './database/db.mjs';
 import cors from 'cors';
+import axios from 'axios';
 const port = 3000;
 
 const app = express();
@@ -42,7 +43,44 @@ app.get('/topten', async(req, res) => {
     console.log('error in pop get request', error);
     res.status(400).send(error);
   }
+});
 
+app.get('/wiki-proxy', async (req, res) => {
+  const pageTitle = req.query.title;
+  console.log('Requesting Wikipedia page:', pageTitle);
+  try {
+    const response = await axios.get('https://en.wikipedia.org/w/api.php', {
+      params: {
+        action: 'query',
+        format: 'json',
+        prop: 'extracts',
+        exintro: '',
+        explaintext: '',
+        titles: pageTitle,
+      },
+    });
+
+    const pageId = Object.keys(response.data.query.pages)[0];
+    const summary = response.data.query.pages[pageId].extract;
+    res.status(200).send(summary);
+  } catch (error) {
+    console.error('Error fetching Wikipedia:', error.message);
+    res.status(400).send(error.message);
+  }
+});
+
+app.get('/wiki-given-names', async (req, res) => {
+  const title = req.query.title;
+  const wikipediaURL = `https://en.wikipedia.org/wiki/${encodeURIComponent(title)}`;
+
+  try {
+    const response = await axios.get(wikipediaURL);
+    const html = response.data;
+    res.send(html);
+  } catch (error) {
+    console.error('Error fetching the Wikipedia page:', error.message);
+    res.status(500).send('Error fetching the Wikipedia page.');
+  }
 });
 
 app.listen(port, () => {

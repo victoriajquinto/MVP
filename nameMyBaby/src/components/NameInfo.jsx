@@ -9,7 +9,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import handleFetchInfo from '../state/Info/infoActions.js';
 import popularity from '../util/PopularityAPI.js';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-// import scrapeWikiSummary from '../util/findWikiTop.js';
+import scrapeWikipediaSummary from '../util/wikiScraper.js';
+import { shadows } from '@mui/system';
+import Link from '@mui/material/Link';
+import IconButton from '@mui/material/IconButton'
+import './index.css';
+
+// import extractNamesFromHtml from '../util/extractNamesFromHtml.js';
 
 
 export function Languages() {
@@ -27,36 +33,84 @@ export function Languages() {
 }
 
 export function Origin() {
-  // const name = useSelector(state => state.name.name);
-  // const [data, setData] = useState('');
+  const name = useSelector(state => state.name.name);
+  const [data, setData] = useState('');
+  const [url, setUrl ] = useState('');
 
-  // useEffect(()=>{
-  //   async function fetchWikiSummary() {
-  //     try {
-  //       const result = await scrapeWikiSummary(`${name} (name)`);
-  //       setData(result)
-  //     } catch (error) {
-  //       console.log("error in fetchwikisummary", error);
-  //     }
-  //   }
-  //   fetchWikiSummary();
-  // }, [name]);
+  useEffect(()=>{
+    async function fetchWikiSummary() {
+      try {
 
-  return(
+        let result = await scrapeWikipediaSummary(`${name}_(name)`);
+        let successfulEndpoint = `${name}_(name)`;
+
+        if(!result) {
+          result = await scrapeWikipediaSummary(`${name}`);
+          successfulEndpoint = `${name}`;
+        }
+
+        if(!result) {
+          result = await scrapeWikipediaSummary(`${name}_(given_name)`);
+          successfulEndpoint = `${name}_(given_name)`;
+        }
+
+        if(result.includes('may refer to:')){
+          result = "No origin information available."
+        }
+
+        let earl = `https://en.wikipedia.org/wiki/${successfulEndpoint}`;
+        setUrl(earl);
+        setData(result);
+      } catch (error) {
+        console.log("error in fetchwikisummary", error);
+      }
+    }
+    fetchWikiSummary();
+  }, [name]);
+
+  return data ? (
     <>
       <Typography variant='body1'>
-        Origin content
+      {data}
       </Typography>
-      {/* {data} */}
+      <Typography variant='body1'>
+        For more information or to see related wikipedia articles, please visit <Link href={url} underline="hover">{url}
+        </Link>.
+      </Typography>
+
+    </>
+  ): (
+    <>
+      <Typography variant='body1'>
+      No origin data available.
+      </Typography>
+      <Typography variant='body1'>
+        For more information, please visit <Link href={url} underline="hover">{url}
+        </Link>.
+      </Typography>
     </>
   )
 }
 
 export function FamousNamesakes() {
+  const name = useSelector(state => state.name.name);
+  const [data, setData] = useState('No famous people information available');
+
+  useEffect(()=>{
+    async function fetchFamousNames() {
+      try {
+        const result = await extractNamesFromHtml(name);
+        setData(result)
+      } catch (error) {
+        console.log("error in fetchFamousNames", error);
+      }
+    }
+    fetchFamousNames();
+  }, [name]);
   return(
     <>
       <Typography variant='body1'>
-        Famous Namesakes content
+        {data}
       </Typography>
     </>
   )
@@ -98,7 +152,7 @@ export function Popularity() {
           <YAxis dataKey="count"/>
           <Tooltip />
           <Legend />
-          <Line type="monotone" dataKey="count" stroke="#8884d8" activeDot={{ r: 8 }} />
+          <Line type="monotone" dataKey="count" stroke="#283618" activeDot={{ r: 8 }} />
         </LineChart>
       </ResponsiveContainer>
     </>):(<Typography variant='body1'> No children in the US named {name} between the ancient past and 2022</Typography>)
@@ -122,16 +176,28 @@ export function SimilarNames() {
 export default function NameInfo() {
   const dispatch = useDispatch();
   const name = useSelector(state => state.name.name);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(()=>{
     dispatch(handleFetchInfo(name));
   },[dispatch, name]);
+
+  useEffect(()=>{
+    setIsFavorite(false);
+  },[name]);
+
+  function handleIcon(){
+    setIsFavorite(true);
+  }
 
   return(
     <>
       <Box sx={{
         backgroundColor: 'secondary.main',
         marginTop: 2,
+        height: '1000px',
+        boxShadow: 10,
+        padding: "20px"
       }}>
         <Grid
           container
@@ -145,30 +211,33 @@ export default function NameInfo() {
             <Languages />
           </Grid>
           <Grid xs={1}>
-            <FavoriteBorderIcon />
+            <IconButton onClick={handleIcon}>
+              {isFavorite ? (<FavoriteIcon />):(<FavoriteBorderIcon />)}
+            </IconButton>
           </Grid>
         </Grid>
+        <hr></hr>
         <Box>
-          <Box>
+          <Box sx={{padding: '10px'}}>
             <Typography variant='h4'>
               Origin
             </Typography>
             <Origin />
           </Box>
-          <Box>
+          {/* <Box>
             <Typography variant='h4'>
               Famous Namesakes
             </Typography>
             <FamousNamesakes />
-          </Box>
-          <Box>
+          </Box> */}
+          <Box sx={{padding: '10px'}}>
             <Typography variant='h4'>
               Similar Names
             </Typography>
             <SimilarNames />
           </Box>
           <Box sx={{
-             height:400, width: 400}}>
+             height:400, width: 800, padding:'10px'}}>
             <Typography variant='h4'>
               U.S. Popularity Over Time
             </Typography>

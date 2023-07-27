@@ -1,7 +1,7 @@
 
 import { HANDLE_SET_NAME } from './nameActions.js'
 
-export default function NameReducer(state = {name: 'Vicky'}, action) {
+export default function NameReducer(state = {name: 'Victoria'}, action) {
 
   switch(action.type) {
     case HANDLE_SET_NAME:

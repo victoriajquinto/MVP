@@ -26,7 +26,7 @@ export default function AdvancedSearch({advancedOpen, handleCloseAdvanced}) {
 
       <DialogContent>
         <Typography variant='body1'>You thought you had </Typography>
-        <Typography variant='body1'>a say on this matter?</Typography>
+        <Typography variant='body1'>a say in this matter?</Typography>
         <Typography variant='body1'>Think again.</Typography>
       </DialogContent>
     </Dialog>

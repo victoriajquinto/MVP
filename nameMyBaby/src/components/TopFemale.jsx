@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Box, List, ListItem, FormControl, Input, FormHelperText} from '@mui/material';
 import Typography from '@mui/material/Typography';
 import sendTopTen from '../util/toptenAPI.js';
-
+import { shadows } from '@mui/system';
 
 export default function TopFemale() {
   const [data, setData] = useState([]);
@@ -36,6 +36,8 @@ export default function TopFemale() {
       height: 500,
       backgroundColor: 'primary.light',
       marginTop: 2,
+      boxShadow: 10,
+      padding: "20px"
     }}>
       <Typography variant='h6'>
         Top US 10 Female Names of:

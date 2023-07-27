@@ -108,7 +108,7 @@ export default function SearchAppBar() {
           >
            Name My Baby
           </Typography>
-          <Search>
+          {/* <Search>
             <SearchIconWrapper>
               <IconButton>
                 <SearchIcon />
@@ -118,7 +118,7 @@ export default function SearchAppBar() {
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
             />
-          </Search>
+          </Search> */}
           <Box>
             <Advanced variant='outlined' onClick={event => handleOpenAdvanced(event)}>Advanced Search</Advanced>
             <AdvancedSearch advancedOpen={advancedOpen} handleCloseAdvanced={handleCloseAdvanced}/>

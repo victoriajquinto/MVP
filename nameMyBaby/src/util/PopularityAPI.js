@@ -3,7 +3,7 @@ import axios from 'axios';
 export default function popularity(name) {
   const url = `http://127.0.0.1:3000/popularity`;
   const method = 'get';
-  console.log('sendAPI arguments', arguments);
+  // console.log('sendAPI arguments', arguments);
 
   return axios({
     url,

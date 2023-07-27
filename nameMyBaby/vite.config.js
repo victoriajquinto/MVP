@@ -12,9 +12,7 @@ export default defineConfig({
       '/popularity': 'http://localhost:3000',
     }
   },
-  // optimizeDeps: {
-  //   exclude: ['isomorphic-fetch'],
-  // },
+
 });
 
 

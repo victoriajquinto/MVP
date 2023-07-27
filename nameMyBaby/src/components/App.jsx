@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import SearchAppBar from './SearchAppBar.jsx';
-import TopUnisex from './TopUnisex.jsx';
 import TopMale from './TopMale.jsx';
 import TopFemale from './TopFemale.jsx';
 import NameInfo from './NameInfo.jsx';
@@ -28,6 +27,7 @@ const theme = createTheme({
       light: "#fefae0",
       main: "#dda15e",
       dark: "#bc6c25",
+      contrastText: '#fefae0'
     }
   },
 })
