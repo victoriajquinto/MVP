@@ -216,10 +216,10 @@ export default function NameInfo() {
           direction='row'
           justifyContent="center"
           alignItems="center">
-          <Grid xs={3} color='info.main'>
+          <Grid xs={4} color='info.main'>
             <Typography variant='h2'>{name}</Typography>
           </Grid>
-          <Grid xs={8}>
+          <Grid xs={7}>
             <Languages />
           </Grid>
           <Grid xs={1}>
