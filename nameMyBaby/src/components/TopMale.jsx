@@ -26,23 +26,29 @@ export default function TopMale() {
     fetchData();
   }, [year]);
 
-  let list = data.map((object, index) => {return (<ListItem><Typography variant='body1'>{index+1}. {object.name}</Typography ></ListItem>)});
+  let list = data.map((object, index) => {return (<ListItem><Typography variant='body1' color="#524434">{index+1}. {object.name}</Typography ></ListItem>)});
 
   return(
     <Box sx={{
-      width: 300,
+      maxWidth: 300,
       height: 500,
       backgroundColor: 'primary.light',
       marginTop: 2,
       boxShadow: 10,
-      padding: "20px"
+      padding: "20px",
+      borderRadius:'1%',
+      color: 'info.main'
     }}>
       <Typography variant='h6'>
-        Top US 10 Male Names of:
-        <FormControl>
-          <Input id="my-input" aria-describedby="my-helper-text" placeholder='2022' onChange={handleYear}/>
-          <FormHelperText id="my-helper-text">Type in a year! YYYY. Range: 1880 to 2022</FormHelperText>
-        </FormControl>
+        Top US 10 Male Names of
+
+        <Box sx={{pl: 1}}>
+          <FormControl>
+            <Input id="my-input" aria-describedby="my-helper-text" placeholder='2022' onChange={handleYear}/>
+            <FormHelperText id="my-helper-text">1880 to 2022</FormHelperText>
+          </FormControl>
+
+        </Box>
       </Typography>
       <List>
         {list}

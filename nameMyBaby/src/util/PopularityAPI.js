@@ -11,7 +11,17 @@ export default function popularity(name) {
     params: { name }
   }).then((res) => {
     // console.log('popularity res', res);
-    return res.data;
+    let result = res.data;
+    result.sort(function(a,b){
+      let yearA = a.year;
+      let yearB = b.year;
+      if(yearA > yearB){
+        return 1
+      } else if (yearB > yearA) {
+        return -1;
+      }
+    })
+    return result;
   }).catch(error => {
     console.log('error in popularity', error);
   });

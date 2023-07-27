@@ -18,18 +18,21 @@ const darkTheme = createTheme(({
 const theme = createTheme({
   palette: {
     primary: {
-      light: '#fefae0',
+      light: '#E5CAA2',
       main: '#606c38',
       dark: '#283618',
-      contrastText: "#fefae0"
+      contrastText: "#F1E5C6"
     },
     secondary: {
-      light: "#fefae0",
-      main: "#dda15e",
+      light: "#F1E5C6",
+      main: "#B07C42",
       dark: "#bc6c25",
-      contrastText: '#fefae0'
+    },
+    info: {
+      main: '#2F2011'
     }
   },
+  spacing: 10,
 })
 
 export default function App() {

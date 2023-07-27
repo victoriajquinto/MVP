@@ -6,11 +6,13 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
-import MenuIcon from '@mui/icons-material/Menu';
+import ChildCareIcon from '@mui/icons-material/ChildCare';
 import SearchIcon from '@mui/icons-material/Search';
 import Button from '@mui/material/Button';
+
 import Random from './Random.jsx';
 import AdvancedSearch from './AdvancedSearch.jsx';
+import Sidebar from './Sidebar.jsx';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -64,10 +66,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+
 export default function SearchAppBar() {
   //for Random Modal
   const [ randomOpen, setRandomOpen ] = useState(false);
   const [ advancedOpen, setAdvancedOpen ] = useState(false);
+  const [ isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   function handleOpenRandom(event) {
     console.log('click!')
@@ -87,19 +91,30 @@ export default function SearchAppBar() {
   function handleCloseAdvanced(event) {
     setAdvancedOpen(false);
   }
+  //for Sidebar
+  function handleOpenSidebar(event) {
+    // alert('click');
+    setIsSidebarOpen(true);
+  }
+  function handleCloseSidebar(event) {
+    setIsSidebarOpen(false);
+  }
   return (
-    <Box sx={{ flexGrow: 1, }}>
+    <Box sx={{ flexGrow: 1,
+      borderRadius:'5%' }}>
       <AppBar position="static">
         <Toolbar>
           <IconButton
             size="large"
             edge="start"
             color="inherit"
-            aria-label="open drawer"
+            aria-label="open Sidebar"
             sx={{ mr: 2 }}
+            onClick={event => handleOpenSidebar()}
           >
-            <MenuIcon />
+            <ChildCareIcon />
           </IconButton>
+          <Sidebar open={isSidebarOpen} onClose={handleCloseSidebar} />
           <Typography
             variant="h6"
             noWrap
@@ -122,6 +137,7 @@ export default function SearchAppBar() {
           <Box>
             <Advanced variant='outlined' onClick={event => handleOpenAdvanced(event)}>Advanced Search</Advanced>
             <AdvancedSearch advancedOpen={advancedOpen} handleCloseAdvanced={handleCloseAdvanced}/>
+
             <RNG variant='outlined' onClick={event => handleOpenRandom(event)}>Random Name Generator</RNG>
             <Random randomOpen={randomOpen} handleCloseRandom={handleCloseRandom}/>
           </Box>

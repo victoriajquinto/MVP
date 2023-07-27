@@ -4,8 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "concurrently \"npm run server\" \"npm run dev\" \"npm run webpack\"",
-    "webpack": "npx webpack --config webpack.config.cjs --mode development",
+    "start": "concurrently \"npm run server\" \"npm run dev\"",
     "server": "node server/server.js",
     "dev": "vite",
     "build": "vite build",

@@ -4,7 +4,7 @@ const initialState = {
   info:{
     info: [
       {
-          name: "Vicky",
+          name: "Victoria",
           gender: "f",
           usages: [
               {
@@ -15,7 +15,7 @@ const initialState = {
           ]
       }
   ],
-  related: {names: ["Amy", "Kathy"]}
+  related: {names: ["Amy", "Kathy", "Nathan", "Collin"]}
   }
 }
 

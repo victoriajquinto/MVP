@@ -1,19 +1,19 @@
 import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
-import { styled, alpha } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Unstable_Grid2';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { useDispatch, useSelector } from 'react-redux';
-import handleFetchInfo from '../state/Info/infoActions.js';
-import popularity from '../util/PopularityAPI.js';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import scrapeWikipediaSummary from '../util/wikiScraper.js';
-import { shadows } from '@mui/system';
+import { shadows } from '@mui/system'; //dont delete, used by box components for styling
 import Link from '@mui/material/Link';
 import IconButton from '@mui/material/IconButton'
 import './index.css';
+import { useDispatch, useSelector } from 'react-redux';
+import handleFetchInfo from '../state/Info/infoActions.js';
+import { addFav, removeFav } from '../state/Favorites/favActions.js'
+import popularity from '../util/PopularityAPI.js';
 
 // import extractNamesFromHtml from '../util/extractNamesFromHtml.js';
 
@@ -25,7 +25,7 @@ export function Languages() {
   // console.log('languages', languages);
   return(
     <>
-      <Typography variant="body1" id='usage'>
+      <Typography variant="body1" id='usage' color='info.main'>
         Usage: {languages}
       </Typography>
     </>
@@ -147,9 +147,9 @@ export function Popularity() {
             bottom: 5,
           }}
         >
-          <CartesianGrid strokeDasharray="3 3" />
+          <CartesianGrid stroke="#606c38" strokeDasharray="3 3" />
           <XAxis dataKey="year" />
-          <YAxis dataKey="count"/>
+          <YAxis dataKey="count" />
           <Tooltip />
           <Legend />
           <Line type="monotone" dataKey="count" stroke="#283618" activeDot={{ r: 8 }} />
@@ -186,8 +186,15 @@ export default function NameInfo() {
     setIsFavorite(false);
   },[name]);
 
-  function handleIcon(){
-    setIsFavorite(true);
+  function handleHeart(){
+    if(isFavorite){
+      setIsFavorite(false);
+      dispatch(removeFav(name))
+    } else {
+      setIsFavorite(true);
+      dispatch(addFav(name));
+
+    }
   }
 
   return(
@@ -195,53 +202,65 @@ export default function NameInfo() {
       <Box sx={{
         backgroundColor: 'secondary.main',
         marginTop: 2,
-        height: '1000px',
-        boxShadow: 10,
-        padding: "20px"
+        height: '1055px',
+        boxShadow: 8,
+        padding: "20px",
+        borderRadius:'.5%',
+        color: 'primary.light'
       }}>
         <Grid
           container
           direction='row'
           justifyContent="center"
           alignItems="center">
-          <Grid xs={4}>
+          <Grid xs={4} color='info.main'>
             <Typography variant='h2'>{name}</Typography>
           </Grid>
           <Grid xs={7}>
             <Languages />
           </Grid>
           <Grid xs={1}>
-            <IconButton onClick={handleIcon}>
+            <IconButton onClick={handleHeart}>
               {isFavorite ? (<FavoriteIcon />):(<FavoriteBorderIcon />)}
             </IconButton>
           </Grid>
         </Grid>
-        <hr></hr>
+        <hr id='mainDivider'></hr>
         <Box>
-          <Box sx={{padding: '10px'}}>
-            <Typography variant='h4'>
+          <Box sx={{p: 1}}>
+            <Typography variant='h5' color= '#524434'>
               Origin
             </Typography>
             <Origin />
+            <Typography variant='body2' color= '#524434'>
+              Source: Wikipedia
+            </Typography>
           </Box>
+          <hr></hr>
           {/* <Box>
-            <Typography variant='h4'>
+            <Typography variant='h5'>
               Famous Namesakes
             </Typography>
             <FamousNamesakes />
           </Box> */}
-          <Box sx={{padding: '10px'}}>
-            <Typography variant='h4'>
+          <Box sx={{p:1}}>
+            <Typography variant='h5' color= '#524434'>
               Similar Names
             </Typography>
             <SimilarNames />
           </Box>
-          <Box sx={{
-             height:400, width: 800, padding:'10px'}}>
-            <Typography variant='h4'>
+          <hr></hr>
+          <Box sx={{p:1}}>
+            <Box sx={{pb: 1}}>
+            <Typography variant='h5' color= '#524434'>
               U.S. Popularity Over Time
             </Typography>
-            <Popularity />
+
+            </Box>
+            <Box sx={{
+              height:400, maxWidth: 800, padding:'10px', backgroundColor:'primary.light', borderRadius:'1%'}}>
+              <Popularity />
+            </Box>
           </Box>
         </Box>
       </Box>
