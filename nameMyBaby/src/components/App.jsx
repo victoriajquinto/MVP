@@ -41,7 +41,6 @@ export default function App() {
         <Grid xs={3}>
           <TopMale />
           <TopFemale />
-          <TopUnisex />
         </Grid>
         <Grid xs={9}>
           <NameInfo />

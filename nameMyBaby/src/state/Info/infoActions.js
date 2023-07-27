@@ -1,4 +1,4 @@
-import fetchNameInfo from '../../util/api.js';
+import fetchNameInfo from '../../util/BehindAPI.js';
 
 export default function handleFetchInfo(name) {
   // console.log('handleFetchInfo called with name:', name);

@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 export function executeRequest(name, endpoint) {
-  console.log('execute request called with endpoint: ', endpoint);
+  // console.log('execute request called with endpoint: ', endpoint);
   const url = 'https://www.behindthename.com/api' + endpoint;
-  console.log(url);
+  // console.log(url);
   const method = 'get';
   const params = {
     key: "vi359119907",
@@ -15,7 +15,7 @@ export function executeRequest(name, endpoint) {
     method,
     params
   }).then((res) => {
-    console.log('executeRequest res', res);
+    // console.log('executeRequest res', res);
     return res.data;
   }).catch(error => {
     console.log('error in executeRequest', error);
@@ -26,7 +26,7 @@ export function executeRequest(name, endpoint) {
 
 export default async function fetchNameInfo(name){
   try {
-    console.log('fetchNameInfo called');
+    // console.log('fetchNameInfo called');
     const info = await executeRequest(name, "/lookup.json");
     await new Promise((resolve) => setTimeout(resolve, 1000));
     const related = await executeRequest(name, '/related.json');

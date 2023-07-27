@@ -7,6 +7,8 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useDispatch, useSelector } from 'react-redux';
 import handleFetchInfo from '../state/Info/infoActions.js';
+import popularity from '../util/PopularityAPI.js';
+// import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 function Languages() {
   const usages = useSelector(state => state.info.info.info[0].usages) || null;
@@ -33,11 +35,47 @@ function Origin() {
 }
 
 function Popularity() {
+  const name = useSelector(state => state.name.name);
+  async function getPopData() {
+    try {
+      return await popularity(name);
+    } catch (error) {
+      console.log("error in getPopData: ", error);
+    }
+  }
+  const resultPromise = (name) => new Promise((resolve, reject) => {
+    getPopData(name)
+      .then(resolve)
+      .catch(reject);
+  });
+  let data = resultPromise()
+  .then(result => {
+    console.log(result);
+    return result;
+  }).catch(error => console.log("error in resultPromise: ", error));
+
   return(
     <>
-      <Typography variant='body1'>
-        Popularity content
-      </Typography>
+      {/* <ResponsiveContainer width="100%" height="100%">
+        <LineChart
+          width={500}
+          height={300}
+          data={data}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="year" />
+          <YAxis dataKey="count"/>
+          <Tooltip />
+          <Legend />
+          <Line type="monotone" dataKey="count" stroke="#8884d8" activeDot={{ r: 8 }} />
+        </LineChart>
+      </ResponsiveContainer> */}
     </>
   )
 }
@@ -54,7 +92,7 @@ function FamousNamesakes() {
 
 function SimilarNames() {
   const related = useSelector(state => state.info.info.related.names);
-  console.log('related', related);
+  // console.log('related', related);
   const similar = related.join(', ');
   return(
     <>
