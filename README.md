@@ -17,9 +17,13 @@ Visit the website and randomly generate a name.
 
 ## Don't wait! Name your baby today! ##
 
+<div align="center">
+<img src="./preview.jpeg" align="center" style="width: 100%" />
+</div>
+
 
 ## 👩‍💻 For Developers ##
 1. 🔧 git clone NameMyBaby repository
 2. In CLI, cd to the repository and run 'npm install'.
-3. 🔑 Create a .env file in the root directory. Make sure to define PORT and DATABASE_URL variables. 
+3. 🔑 Create a .env file in the root directory. Make sure to define PORT and DATABASE_URL variables.
 4. In CLI, run "npm run start".

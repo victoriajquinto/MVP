@@ -17,6 +17,10 @@ Visit the website and randomly generate a name.
 
 ## Don't wait! Name your baby today! ##
 
+<div align="center">
+<img src="../preview.jpeg" align="center" style="width: 100%" />
+</div>
+
 ## 👩‍💻 For Developers ##
 1. 🔧 git clone NameMyBaby repository
 2. In CLI, cd to the repository and run 'npm install'.
