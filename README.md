@@ -18,7 +18,7 @@ Visit the website and randomly generate a name.
 ## Don't wait! Name your baby today! ##
 
 <div align="center">
-<img src="./preview.jpeg" align="center" style="width: 100%" />
+<img src="./preview.jpg" align="center" style="width: 100%" />
 </div>
 
 
