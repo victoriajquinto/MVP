@@ -3,7 +3,9 @@ import morgan from 'morgan';
 import {db} from './database/db.mjs';
 import cors from 'cors';
 import axios from 'axios';
-const port = 3000;
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 
@@ -11,6 +13,8 @@ app.use(express.json());
 app.use(morgan('dev'));
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
+
+const port = process.env.PORT|| 3000;
 
 //ROUTES
 
