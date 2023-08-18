@@ -16,27 +16,22 @@ Oh, and I also like to write press-releases in what I call "Oprah-speak" for mai
 Once the project moves into development, the press release can be used as a touchstone; a guiding light. The product team can ask themselves, "Are we building what is in the press release?" If they find they're spending time building things that aren't in the press release (overbuilding), they need to ask themselves why. This keeps product development focused on achieving the customer benefits and not building extraneous stuff that takes longer to build, takes resources to maintain, and doesn't provide real customer benefit (at least not enough to warrant inclusion in the press release).
  -->
 
-# Name My Baby
+# 👶 Name My Baby
+### For indecisive parents who have been calling their baby 'it'
 
-## For indecisive parents who have been calling their baby 'it'
-
-## Summary ##
+## 🔍 Overview ##
 This easy-to-use app is designed for expectant parents who want to choose a unique, meaningful name for their child without being overwhelmed by all the options out there.
 
-## Problem ##
-As soon as you make your pregnancy announcements, the first question friends and family will ask you is "Any names?". You're tired of saying, "Not yet," but you're also too busy to put in the time to think of a name.
+## 📝 Summary ##
+As soon as you make your pregnancy announcements, the first question friends and family will ask you is "Any names?". You're tired of saying, "Not yet," but you're also too busy to put in the time to think of a name. Name My Baby is designed to make this decision easy by generating a random baby name for you! Simply select a gender to get started.
 
-## Solution ##
-Name My Baby is designed to make this decision easy by generating a random baby name for you! Simply select a gender to get started.
+## Use this app instead of calling your baby "it". ##
 
-## Quote from You ##
-Use this app instead of calling your baby "it".
-
-## How to Get Started ##
+## 🚀 How to Get Started ##
 Visit the website and randomly generate a name.
 
-## Customer Quote ##
+## 💬 Customer Quote ##
 "A simple design without the shilling and the ads." - anonymous
 
-## Closing and Call to Action ##
-Don't wait! Name your baby today!
+## Don't wait! Name your baby today! ##
+
