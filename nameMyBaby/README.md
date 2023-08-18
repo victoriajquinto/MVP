@@ -10,7 +10,7 @@ As soon as you make your pregnancy announcements, the first question friends and
 ## Use this app instead of calling your baby "it". ##
 
 ## 🚀 How to Get Started ##
-Visit the website and randomly generate a name.
+Visit the website and randomly generate a name to see facts about the name, similar names, and how many babies in the US were given that name between ancient history and 2022. You can also search for the top 10 boy and girl names in the US for each year since the US started collecting census records.
 
 ## 💬 Customer Quote ##
 "A simple design without the shilling and the ads." - anonymous
