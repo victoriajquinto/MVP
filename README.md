@@ -21,6 +21,9 @@ Visit the website and randomly generate a name to see facts about the name, simi
 <img src="./preview.jpg" align="center" style="width: 100%" />
 </div>
 
+## Future Features ##
+- Advanced Search for Baby Names
+- Favorites List
 
 ## 👩‍💻 For Developers ##
 1. 🔧 git clone NameMyBaby repository
