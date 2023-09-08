@@ -12,7 +12,6 @@ export default function RNG(selected) {
       number: 1
     }
   }).then(response => {
-    console.log('random name ', name);
     return response.data.names[0];
   }).catch(error => {
     console.log(error);

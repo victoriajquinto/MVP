@@ -11,8 +11,10 @@ import SearchIcon from '@mui/icons-material/Search';
 import Button from '@mui/material/Button';
 
 import Random from './Random.jsx';
-import AdvancedSearch from './AdvancedSearch.jsx';
+
 import Sidebar from './Sidebar.jsx';
+import { handleSetSpecificName } from '../state/Name/nameActions.js';
+import { useDispatch } from 'react-redux';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -29,10 +31,6 @@ const Search = styled('div')(({ theme }) => ({
   },
 }));
 
-const Advanced = styled(Button)(({ theme }) => ({
-  color: 'inherit',
-  border: 'primary.light'
-}));
 
 const RNG = styled(Button)(({ theme }) => ({
   color: 'inherit',
@@ -60,9 +58,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function SearchAppBar() {
   //for Random Modal
   const [ randomOpen, setRandomOpen ] = useState(false);
-  const [ advancedOpen, setAdvancedOpen ] = useState(false);
+  // const [ advancedOpen, setAdvancedOpen ] = useState(false);
   const [ isSidebarOpen, setIsSidebarOpen ] = useState(false);
   const [ search, setSearch ] = useState('');
+
+  const dispatch = useDispatch();
 
   //for Random Modal
   function handleOpenRandom(event) {
@@ -74,32 +74,24 @@ export default function SearchAppBar() {
     setRandomOpen(false);
   }
 
-  //for Advanced Search
-  function handleOpenAdvanced(event) {
-    console.log('click!')
-    setAdvancedOpen(true);
-  }
-
-  function handleCloseAdvanced(event) {
-    setAdvancedOpen(false);
-  }
-
   //for Sidebar
-  function handleOpenSidebar(event) {
+  function handleOpenSidebar() {
     // alert('click');
     setIsSidebarOpen(true);
   }
-  function handleCloseSidebar(event) {
+  function handleCloseSidebar() {
     setIsSidebarOpen(false);
   }
 
   //for Search Bar
   function handleSearchText(event) {
+    console.log(event.target.value);
     setSearch(event.target.value);
   }
-  function handleSearchSubmit(event) {
+  async function handleSearchSubmit() {
     //send api call for text saved in search state
-    alert('clicked!');
+    console.log('searching for:', search)
+    await dispatch(handleSetSpecificName(search))
   }
 
   return (
@@ -137,9 +129,6 @@ export default function SearchAppBar() {
             </IconButton>
           </Search>
           <Box>
-            {/* <Advanced variant='outlined' onClick={event => handleOpenAdvanced(event)}>Advanced Search</Advanced>
-            <AdvancedSearch advancedOpen={advancedOpen} handleCloseAdvanced={handleCloseAdvanced}/> */}
-
             <RNG variant='outlined' onClick={event => handleOpenRandom(event)}>Random Name Generator</RNG>
             <Random randomOpen={randomOpen} handleCloseRandom={handleCloseRandom}/>
           </Box>

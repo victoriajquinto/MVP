@@ -12,11 +12,11 @@ export default function handleFetchRandomName(gender) {
   }
 }
 
-export function handleFetchSpecificName(name){
-  return (dispatch) => {
-
+export function handleSetSpecificName(name){
+  return {
+    type: HANDLE_SET_NAME,
+    name
   }
-
 }
 
 export function handleSetRandomName(name) {
