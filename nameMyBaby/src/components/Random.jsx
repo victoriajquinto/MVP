@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Dialog, DialogTitle, DialogContent, Select, MenuItem, FormControl, InputLabel, IconButton, DialogActions, Grid } from '@mui/material';
 import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined';
-import handleFetchName from '../state/Name/nameActions.js';
+import handleFetchRandomName from '../state/Name/nameActions.js';
 import { useDispatch, useSelector } from 'react-redux';
 
 export default function Random({randomOpen, handleCloseRandom}) {
@@ -13,7 +13,7 @@ export default function Random({randomOpen, handleCloseRandom}) {
   async function handleChange(event) {
     const selectedGender = event.target.value;
     setGender(selectedGender);
-    await dispatch(handleFetchName(selectedGender));
+    await dispatch(handleFetchRandomName(selectedGender));
     setGender('');
     handleCloseRandom();
   }

@@ -1,11 +1,10 @@
 import RNG from '../../util/RNG.js';
 
-export default function handleFetchName(gender) {
+export default function handleFetchRandomName(gender) {
  return (dispatch) => {
    RNG(gender)
      .then(name => {
-       dispatch(handleSetName(name));
-      //  console.log(name)
+       dispatch(handleSetRandomName(name));
      })
      .catch(error => {
       console.log('error in handleSetName action: ', error)
@@ -13,7 +12,14 @@ export default function handleFetchName(gender) {
   }
 }
 
-export function handleSetName(name) {
+export function handleFetchSpecificName(name){
+  return (dispatch) => {
+
+  }
+
+}
+
+export function handleSetRandomName(name) {
   return {
     type: HANDLE_SET_NAME,
     name

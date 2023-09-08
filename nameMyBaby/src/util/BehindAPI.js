@@ -6,7 +6,7 @@ export function executeRequest(name, endpoint) {
   // console.log(url);
   const method = 'get';
   const params = {
-    key: "vi359119907",
+    key: import.meta.env.VITE_BTN_API_KEY,
     name: name,
   }
 

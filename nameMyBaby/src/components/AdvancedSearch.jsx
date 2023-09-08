@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Dialog, DialogTitle, DialogContent, Select, MenuItem, FormControl, InputLabel, IconButton, DialogActions, Grid, Typography } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, Select, MenuItem, FormControl, InputLabel, IconButton, DialogActions, Grid, Typography, TextField } from '@mui/material';
 import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined';
 import handleFetchName from '../state/Name/nameActions.js';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,7 +12,7 @@ export default function AdvancedSearch({advancedOpen, handleCloseAdvanced}) {
       <Grid container spacing={1}>
         <Grid>
           <DialogTitle>
-            DENIED.
+            Advanced Search
           </DialogTitle>
         </Grid>
         <Grid>
@@ -25,9 +25,10 @@ export default function AdvancedSearch({advancedOpen, handleCloseAdvanced}) {
       </Grid>
 
       <DialogContent>
-        <Typography variant='body1'>You thought you had </Typography>
-        <Typography variant='body1'>a say in this matter?</Typography>
-        <Typography variant='body1'>Think again.</Typography>
+        <TextField variant='outlined' label="Name" id="Name" />
+        <TextField variant='outlined' label="Gender" id='Gender'/>
+        <TextField variant='outlined' label='Starts With...' id='start' />
+        <TextField variant='outlined' label='...Ends With' id='end' />
       </DialogContent>
     </Dialog>
   )

@@ -39,22 +39,12 @@ const RNG = styled(Button)(({ theme }) => ({
   border: 'primary.light'
 }));
 
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    paddingLeft: `calc(1em + ${theme.spacing(1)})`,
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('sm')]: {
@@ -71,8 +61,10 @@ export default function SearchAppBar() {
   //for Random Modal
   const [ randomOpen, setRandomOpen ] = useState(false);
   const [ advancedOpen, setAdvancedOpen ] = useState(false);
-  const [ isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [ isSidebarOpen, setIsSidebarOpen ] = useState(false);
+  const [ search, setSearch ] = useState('');
 
+  //for Random Modal
   function handleOpenRandom(event) {
     console.log('click!')
     setRandomOpen(true);
@@ -91,6 +83,7 @@ export default function SearchAppBar() {
   function handleCloseAdvanced(event) {
     setAdvancedOpen(false);
   }
+
   //for Sidebar
   function handleOpenSidebar(event) {
     // alert('click');
@@ -99,6 +92,16 @@ export default function SearchAppBar() {
   function handleCloseSidebar(event) {
     setIsSidebarOpen(false);
   }
+
+  //for Search Bar
+  function handleSearchText(event) {
+    setSearch(event.target.value);
+  }
+  function handleSearchSubmit(event) {
+    //send api call for text saved in search state
+    alert('clicked!');
+  }
+
   return (
     <Box sx={{ flexGrow: 1,
       borderRadius:'5%' }}>
@@ -123,20 +126,19 @@ export default function SearchAppBar() {
           >
            Name My Baby
           </Typography>
-          {/* <Search>
-            <SearchIconWrapper>
-              <IconButton>
-                <SearchIcon />
-              </IconButton>
-            </SearchIconWrapper>
+          <Search>
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
+              onChange={event => handleSearchText(event)}
             />
-          </Search> */}
+            <IconButton onClick={event => handleSearchSubmit()}>
+              <SearchIcon />
+            </IconButton>
+          </Search>
           <Box>
-            <Advanced variant='outlined' onClick={event => handleOpenAdvanced(event)}>Advanced Search</Advanced>
-            <AdvancedSearch advancedOpen={advancedOpen} handleCloseAdvanced={handleCloseAdvanced}/>
+            {/* <Advanced variant='outlined' onClick={event => handleOpenAdvanced(event)}>Advanced Search</Advanced>
+            <AdvancedSearch advancedOpen={advancedOpen} handleCloseAdvanced={handleCloseAdvanced}/> */}
 
             <RNG variant='outlined' onClick={event => handleOpenRandom(event)}>Random Name Generator</RNG>
             <Random randomOpen={randomOpen} handleCloseRandom={handleCloseRandom}/>

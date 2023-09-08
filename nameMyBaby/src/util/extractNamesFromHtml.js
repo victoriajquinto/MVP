@@ -8,7 +8,7 @@ export default async function extractNamesFromHTML(name) {
     const response = await await axios.get('http://localhost:3000/wiki-proxy', {
       params: {
         title: encodedTitle,
-      },;
+      };
     const html = response.data;
 
     // Regular expression to match the bulleted list
