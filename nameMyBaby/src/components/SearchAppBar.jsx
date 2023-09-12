@@ -72,7 +72,6 @@ export default function SearchAppBar() {
 
   //for Sidebar
   function handleOpenSidebar() {
-    alert('baby clicked');
     setIsSidebarOpen(true);
   }
   function handleCloseSidebar() {

@@ -47,8 +47,17 @@ export default function Sidebar({ isSidebarOpen, handleCloseSidebar }) {
           </ListItem>
           <Divider />
           <ListItem>
-          <ListItemText
+            <ListItemText
               primary="Girls"
+              sx={{
+                color: 'secondary.light'
+              }}
+            />
+          </ListItem>
+          <Divider />
+          <ListItem>
+            <ListItemText
+              primary="Unisex"
               sx={{
                 color: 'secondary.light'
               }}
