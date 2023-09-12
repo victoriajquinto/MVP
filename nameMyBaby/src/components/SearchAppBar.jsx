@@ -9,9 +9,7 @@ import InputBase from '@mui/material/InputBase';
 import ChildCareIcon from '@mui/icons-material/ChildCare';
 import SearchIcon from '@mui/icons-material/Search';
 import Button from '@mui/material/Button';
-
 import Random from './Random.jsx';
-
 import Sidebar from './Sidebar.jsx';
 import { handleSetSpecificName } from '../state/Name/nameActions.js';
 import { useDispatch } from 'react-redux';
@@ -58,25 +56,23 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function SearchAppBar() {
   //for Random Modal
   const [ randomOpen, setRandomOpen ] = useState(false);
-  // const [ advancedOpen, setAdvancedOpen ] = useState(false);
   const [ isSidebarOpen, setIsSidebarOpen ] = useState(false);
   const [ search, setSearch ] = useState('');
 
   const dispatch = useDispatch();
 
   //for Random Modal
-  function handleOpenRandom(event) {
-    console.log('click!')
+  function handleOpenRandom() {
+    alert('modal open');
     setRandomOpen(true);
   }
-
-  function handleCloseRandom(event) {
+  function handleCloseRandom() {
     setRandomOpen(false);
   }
 
   //for Sidebar
   function handleOpenSidebar() {
-    // alert('click');
+    alert('baby clicked');
     setIsSidebarOpen(true);
   }
   function handleCloseSidebar() {
@@ -85,12 +81,10 @@ export default function SearchAppBar() {
 
   //for Search Bar
   function handleSearchText(event) {
-    console.log(event.target.value);
     setSearch(event.target.value);
   }
   async function handleSearchSubmit() {
     //send api call for text saved in search state
-    console.log('searching for:', search)
     await dispatch(handleSetSpecificName(search))
   }
 
@@ -109,7 +103,7 @@ export default function SearchAppBar() {
           >
             <ChildCareIcon />
           </IconButton>
-          <Sidebar open={isSidebarOpen} onClose={handleCloseSidebar} />
+          <Sidebar isSidebarOpen={isSidebarOpen} handleCloseSidebar={handleCloseSidebar}/>
           <Typography
             variant="h6"
             noWrap
@@ -122,7 +116,7 @@ export default function SearchAppBar() {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
-              onChange={event => handleSearchText(event)}
+              onChange={event => handleSearchText()}
             />
             <IconButton onClick={event => handleSearchSubmit()}>
               <SearchIcon />

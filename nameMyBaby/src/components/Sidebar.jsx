@@ -1,36 +1,61 @@
-import ListItem from '@mui/material/ListItem';
 import Drawer from '@mui/material/Drawer';
-import ListItemText from '@mui/material/ListItemText';
 import Box from '@mui/material/Box';
-import { styled, alpha } from '@mui/material/styles';
 import List from '@mui/material/List';
-import { Dialog, DialogTitle, DialogContent, Select, MenuItem, FormControl, InputLabel, IconButton, DialogActions, Grid } from '@mui/material';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import Divider from '@mui/material/Divider';
 
 export default function Sidebar({ isSidebarOpen, handleCloseSidebar }) {
-
   return (
-    // <Drawer open={isSidebarOpen} onClose={handleCloseSidebar} backgroundColor='primary.main'>
-    //   <Box
-    //     sx={{width: 250}}
-    //     onClick={event => handleCloseSidebar()}
-    //   >
-    //     <List>
-    //       <ListItemText>
-
-    //       </ListItemText>
-
-    //     </List>
-
-    //   </Box>
-
-    // </Drawer>
-
-    <Dialog open={isSidebarOpen} onClose={handleCloseSidebar }>
+    <Drawer
+    anchor={'left'}
+    open={isSidebarOpen}
+    onClose={handleCloseSidebar}
+    PaperProps={{
+      paper: {
+        backgroundColor: 'primary.main'
+      }
+    }}
+    >
       <Box
-        sx={{width: 250}}
-        onClick={event => handleCloseSidebar()}
-      ></Box>
-
-    </Dialog>
-  )
+        sx={{
+          width: 250,
+          height: '100%',
+          backgroundColor: '#606c38'
+        }}
+        role='presentation'
+        onClick={() => handleCloseSidebar()}
+      >
+        <List>
+          <ListItem>
+            <ListItemText
+              primary="FAVORITES"
+              sx={{
+                color: 'secondary.light',
+                fontSize: 'h4.fontSize'
+              }}
+            />
+          </ListItem>
+          <Divider />
+          <ListItem>
+            <ListItemText
+              primary="Boys"
+              sx={{
+                color: 'secondary.light'
+              }}
+            />
+          </ListItem>
+          <Divider />
+          <ListItem>
+          <ListItemText
+              primary="Girls"
+              sx={{
+                color: 'secondary.light'
+              }}
+            />
+          </ListItem>
+        </List>
+      </Box>
+    </Drawer>
+  );
 }

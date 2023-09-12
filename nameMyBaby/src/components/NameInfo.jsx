@@ -15,9 +15,6 @@ import handleFetchInfo from '../state/Info/infoActions.js';
 import { addFav, removeFav } from '../state/Favorites/favActions.js'
 import popularity from '../util/PopularityAPI.js';
 
-// import extractNamesFromHtml from '../util/extractNamesFromHtml.js';
-
-
 export function Languages() {
   const usages = useSelector(state => state.info.info.info[0].usages) || null;
   // console.log('usages in NameInfo', usages);
@@ -185,19 +182,19 @@ export default function NameInfo() {
     dispatch(handleFetchInfo(name));
   },[dispatch, name]);
 
-  useEffect(()=>{
-    setIsFavorite(false);
-  },[name]);
+  // useEffect(()=>{
+  //   setIsFavorite(false);
+  // },[name]);
 
-  function handleHeart(){
+  async function handleHeart(){
     if(isFavorite){
       setIsFavorite(false);
-      dispatch(removeFav(name))
+      await dispatch(removeFav(name))
     } else {
       setIsFavorite(true);
-      dispatch(addFav(name));
-
+      await dispatch(addFav(name));
     }
+    console.log('isFavorite after conditionals: ', isFavorite);
   }
 
   return(
