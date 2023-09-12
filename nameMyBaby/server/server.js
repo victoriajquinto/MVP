@@ -100,16 +100,33 @@ app.get('/favorites', async (req, res) => {
   }
 });
 
-app.post('favorites', async (req, res) => {
+app.post('/favorites', async (req, res) => {
   try {
     const name = req.query.name; //TODO: check if req.query or req.params
     const gender = req.query.gender; //TODO: check if req.query or req.params
-    const queryString = 'EDIT ME'; //TODO: google postgres command to insert into favorites table
-    const data = await db.query(queryString, [gender]);
+    const params = [name, gender];
+    const queryString = 'INSERT INTO favorites (name, gender) VALUES ($1, $2)';
+    const data = await db.query(queryString, [params]);
     res.status(201).send(data); //TODO
   } catch (error) {
     console.error('Server error posting name to favorites:', error.message);
     res.status(401).send('Server error posting name to favorites');
+  }
+});
+
+app.delete('/favorites', async (req, res) => {
+  try {
+    const name = req.query.name; //TODO: check if req.query or req.params
+    const gender = req.query.gender; //TODO: check if req.query or req.params
+    const params = [name, gender];
+    const queryString = 'DELETE FROM favorites WHERE (name = $1 AND gender = $2)';
+    const data = await db.query(queryString, [params]);
+    res.status(200).send(data); //TODO
+
+  } catch (error) {
+    console.error('Server error deleting name from favorites:', error.message);
+    res.status(401).send('Server error deleting name from favorites');
+
   }
 });
 
