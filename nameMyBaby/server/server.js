@@ -24,7 +24,7 @@ app.get('/hi', (req, res) => {
 
 app.get('/popularity', async(req, res) => {
   try{
-    const name = req.query.name || "Vicky";
+    const name = req.query.name || "Victoria";
     const queryString = 'SELECT year, count FROM popularity WHERE name = $1';
     const data = await db.query(queryString, [name])
     res.status(200).send(data);
@@ -84,6 +84,32 @@ app.get('/wiki-given-names', async (req, res) => {
   } catch (error) {
     console.error('Error fetching the Wikipedia page:', error.message);
     res.status(500).send('Error fetching the Wikipedia page.');
+  }
+});
+
+app.get('/favorites', async (req, res) => {
+  try {
+    const gender = req.query.gender;
+    const queryString = 'SELECT * FROM favorites WHERE gender = $1'
+    const data = await db.query(queryString, [gender]);
+    res.status(200).send(data);
+
+  } catch (error) {
+    console.error('Server error getting favorites:', error.message);
+    res.status(400).send('Server error getting favorites:');
+  }
+});
+
+app.post('favorites', async (req, res) => {
+  try {
+    const name = req.query.name; //TODO: check if req.query or req.params
+    const gender = req.query.gender; //TODO: check if req.query or req.params
+    const queryString = 'EDIT ME'; //TODO: google postgres command to insert into favorites table
+    const data = await db.query(queryString, [gender]);
+    res.status(201).send(data); //TODO
+  } catch (error) {
+    console.error('Server error posting name to favorites:', error.message);
+    res.status(401).send('Server error posting name to favorites');
   }
 });
 
