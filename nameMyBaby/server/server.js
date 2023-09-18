@@ -87,11 +87,11 @@ app.get('/wiki-given-names', async (req, res) => {
   }
 });
 
-app.get('/favorites', async (req, res) => {
+app.get('/favorites/:gender', async (req, res) => {
+  const gender = req.params.gender;
   try {
-    const gender = req.query.gender;
     const queryString = 'SELECT * FROM favorites WHERE gender = $1'
-    const data = await db.query(queryString, [gender]);
+    const data = await db.query(queryString, gender);
     res.status(200).send(data);
 
   } catch (error) {
@@ -101,13 +101,14 @@ app.get('/favorites', async (req, res) => {
 });
 
 app.post('/favorites', async (req, res) => {
+  const name = req.body.name; //TODO: check if req.query or req.params
+  const gender = req.body.gender; //TODO: check if req.query or req.params
   try {
-    const name = req.query.name; //TODO: check if req.query or req.params
-    const gender = req.query.gender; //TODO: check if req.query or req.params
-    const params = [name, gender];
+    const values = [name, gender];
+    console.log(values);
     const queryString = 'INSERT INTO favorites (name, gender) VALUES ($1, $2)';
-    const data = await db.query(queryString, [params]);
-    res.status(201).send(data); //TODO
+    const data = await db.query(queryString, values);
+    res.status(201).send('Record inserted successfully'); //TODO
   } catch (error) {
     console.error('Server error posting name to favorites:', error.message);
     res.status(401).send('Server error posting name to favorites');
@@ -115,12 +116,12 @@ app.post('/favorites', async (req, res) => {
 });
 
 app.delete('/favorites', async (req, res) => {
+  const name = req.params.name; //TODO: check if req.query or req.params
+  const gender = req.parms.gender; //TODO: check if req.query or req.params
   try {
-    const name = req.query.name; //TODO: check if req.query or req.params
-    const gender = req.query.gender; //TODO: check if req.query or req.params
-    const params = [name, gender];
+    const values = [name, gender];
     const queryString = 'DELETE FROM favorites WHERE (name = $1 AND gender = $2)';
-    const data = await db.query(queryString, [params]);
+    const data = await db.query(queryString, values);
     res.status(200).send(data); //TODO
 
   } catch (error) {
