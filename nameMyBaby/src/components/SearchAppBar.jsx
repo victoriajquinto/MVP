@@ -13,6 +13,7 @@ import Random from './Random.jsx';
 import Sidebar from './Sidebar.jsx';
 import { handleSetSpecificName } from '../state/Name/nameActions.js';
 import { useDispatch } from 'react-redux';
+import { getFavorites } from '../util/favorites.js';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -63,7 +64,6 @@ export default function SearchAppBar() {
 
   //for Random Modal
   function handleOpenRandom() {
-    alert('modal open');
     setRandomOpen(true);
   }
   function handleCloseRandom() {
@@ -98,7 +98,7 @@ export default function SearchAppBar() {
             color="inherit"
             aria-label="open Sidebar"
             sx={{ mr: 2 }}
-            onClick={event => handleOpenSidebar()}
+            onClick={() => handleOpenSidebar()}
           >
             <ChildCareIcon />
           </IconButton>
@@ -115,9 +115,9 @@ export default function SearchAppBar() {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
-              onChange={event => handleSearchText()}
+              onChange={event => handleSearchText(event)}
             />
-            <IconButton onClick={event => handleSearchSubmit()}>
+            <IconButton onClick={() => handleSearchSubmit()}>
               <SearchIcon />
             </IconButton>
           </Search>
