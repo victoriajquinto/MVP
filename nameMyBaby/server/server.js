@@ -100,8 +100,8 @@ app.get('/favorites', async (req, res) => {
 });
 
 app.post('/favorites', async (req, res) => {
-  const name = req.body.name; //TODO: check if req.query or req.params
-  const gender = req.body.gender; //TODO: check if req.query or req.params
+  const name = req.body.name;
+  const gender = req.body.gender;
   try {
     const values = [name, gender];
     console.log(values);
@@ -114,14 +114,15 @@ app.post('/favorites', async (req, res) => {
   }
 });
 
-app.delete('/favorites', async (req, res) => {
-  const name = req.params.name; //TODO: check if req.query or req.params
-  const gender = req.params.gender; //TODO: check if req.query or req.params
+app.delete('/favorites/:name/:gender', async (req, res) => {
+  const name = req.params.name;
+  const gender = req.params.gender;
+  console.log('name and gender: ', name, gender);
   try {
     const values = [name, gender];
     const queryString = 'DELETE FROM favorites WHERE (name = $1 AND gender = $2)';
-    await db.query(queryString, values);
-    res.status(200).send(`successfully delete ${name}`); //TODO
+    const data = await db.query(queryString, values);
+    res.status(200).send(`successfully deleted ${name}. Data: ${data}`);
   } catch (error) {
     console.error('Server error deleting name from favorites:', error.message);
     res.status(401).send('Server error deleting name from favorites');

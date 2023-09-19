@@ -26,14 +26,13 @@ export function getFavorites(){
 export function deleteFavorite(name, gender){
   console.log('util/deleteFavorite called with: ', name, gender);
 
-  return axios.delete('/favorites', {
+  return axios.delete(`/favorites/${name}/${gender}`, {
     name: name,
     gender: gender
   }).then((response) => {
-
-
+      console.log(response.data);
   }).catch((error) => {
-     console.log('error in util/deleteFavorite');
+     console.log('error in util/deleteFavorite: ', error.message);
   })
 
 }
