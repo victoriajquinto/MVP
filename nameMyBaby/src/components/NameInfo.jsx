@@ -2,9 +2,7 @@ import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Unstable_Grid2';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import scrapeWikipediaSummary from '../util/wikiScraper.js';
 import { shadows } from '@mui/system'; //dont delete, used by box components for styling
 import Link from '@mui/material/Link';
@@ -12,8 +10,8 @@ import IconButton from '@mui/material/IconButton'
 import './index.css';
 import { useDispatch, useSelector } from 'react-redux';
 import handleFetchInfo from '../state/Info/infoActions.js';
-import { addFav, removeFav } from '../state/Favorites/favActions.js'
 import popularity from '../util/PopularityAPI.js';
+import AddFavorites from './AddFavorites.jsx';
 
 export function Languages() {
   const usages = useSelector(state => state.info.info.info[0].usages) || null;
@@ -92,30 +90,6 @@ export function Origin() {
   )
 }
 
-export function FamousNamesakes() {
-  const name = useSelector(state => state.name.name);
-  const [data, setData] = useState('No famous people information available');
-
-  useEffect(()=>{
-    async function fetchFamousNames() {
-      try {
-        const result = await extractNamesFromHtml(name);
-        setData(result)
-      } catch (error) {
-        console.log("error in fetchFamousNames", error);
-      }
-    }
-    fetchFamousNames();
-  }, [name]);
-  return(
-    <>
-      <Typography variant='body1'>
-        {data}
-      </Typography>
-    </>
-  )
-}
-
 export function Popularity() {
   const name = useSelector(state => state.name.name);
   const [data, setData] = useState([]);
@@ -182,19 +156,12 @@ export default function NameInfo() {
     dispatch(handleFetchInfo(name));
   },[dispatch, name]);
 
-  // useEffect(()=>{
-  //   setIsFavorite(false);
-  // },[name]);
 
-  async function handleHeart(){
-    if(isFavorite){
-      setIsFavorite(false);
-      await dispatch(removeFav(name))
-    } else {
-      setIsFavorite(true);
-      await dispatch(addFav(name));
-    }
-    console.log('isFavorite after conditionals: ', isFavorite);
+  function handleOpenAddFavorites() {
+    setIsFavorite(true);
+  }
+  function handleCloseAddFavorites() {
+    setIsFavorite(false);
   }
 
   return(
@@ -220,9 +187,10 @@ export default function NameInfo() {
             <Languages />
           </Grid>
           <Grid xs={1}>
-            <IconButton onClick={handleHeart}>
-              {isFavorite ? (<FavoriteIcon />):(<FavoriteBorderIcon />)}
+            <IconButton onClick={event => handleOpenAddFavorites(event)}>
+              <AddCircleOutlineIcon />
             </IconButton>
+            <AddFavorites isFavorite={isFavorite} handleCloseAddFavorites={handleCloseAddFavorites}/>
           </Grid>
         </Grid>
         <hr id='mainDivider'></hr>
@@ -234,12 +202,6 @@ export default function NameInfo() {
             <Origin />
           </Box>
           <hr></hr>
-          {/* <Box>
-            <Typography variant='h5'>
-              Famous Namesakes
-            </Typography>
-            <FamousNamesakes />
-          </Box> */}
           <Box sx={{p:1}}>
             <Typography variant='h5' color= '#524434'>
               Similar Names
