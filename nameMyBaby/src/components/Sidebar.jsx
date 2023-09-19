@@ -5,16 +5,16 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
-import { getFavorites } from '../util/favorites.js';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { getFavorites } from '../util/favorites.js';
+import { deleteFavorite } from '../util/favorites.js';
 
 export default function Sidebar({ isSidebarOpen, handleCloseSidebar }) {
 
   const [ favorites, setFavorites ] = useState([]);
 
   useEffect(() => {
-    // Fetch favorites and update the state when the sidebar is opened
     if (isSidebarOpen) {
       getFavorites()
         .then((data) => {
@@ -26,6 +26,7 @@ export default function Sidebar({ isSidebarOpen, handleCloseSidebar }) {
     }
   }, [isSidebarOpen]);
 
+
   const favoriteBoyNames =
     favorites
     .filter((el) => el.gender === 'm')
@@ -33,7 +34,11 @@ export default function Sidebar({ isSidebarOpen, handleCloseSidebar }) {
       <ListItem
         key={boy.name}
         secondaryAction={
-          <IconButton edge="end" aria-label="delete">
+          <IconButton
+            edge="end"
+            aria-label="delete boy"
+            onClick = {() => {deleteFavorite(boy.name, boy.gender)}}
+          >
             <DeleteIcon />
           </IconButton>
         }
@@ -48,7 +53,11 @@ export default function Sidebar({ isSidebarOpen, handleCloseSidebar }) {
     <ListItem
       key={girl.name}
       secondaryAction={
-        <IconButton edge="end" aria-label="delete">
+        <IconButton
+          edge="end"
+          aria-label="delete girl"
+          onClick = {() => {deleteFavorite(girl.name, girl.gender)}}
+        >
           <DeleteIcon />
         </IconButton>
     }>
@@ -62,7 +71,11 @@ export default function Sidebar({ isSidebarOpen, handleCloseSidebar }) {
     <ListItem
       key={unisex.name}
       secondaryAction={
-        <IconButton edge="end" aria-label="delete">
+        <IconButton
+          edge="end"
+          aria-label="delete unisex"
+          onClick = {() => {deleteFavorite(unisex.name, unisex.gender)}}
+        >
           <DeleteIcon />
         </IconButton>
       }
@@ -98,7 +111,7 @@ export default function Sidebar({ isSidebarOpen, handleCloseSidebar }) {
           <Divider />
           <ListItem>
             <Typography variant='h5' color='secondary.light'>boys</Typography >
-            </ListItem>
+          </ListItem>
             {favoriteBoyNames}
           <Divider />
           <ListItem>
@@ -107,7 +120,7 @@ export default function Sidebar({ isSidebarOpen, handleCloseSidebar }) {
           {favoriteGirlNames}
           <Divider />
           <ListItem>
-          <Typography variant='h5' color='secondary.light'>unisex</Typography >
+            <Typography variant='h5' color='secondary.light'>unisex</Typography >
           </ListItem>
           {favoriteUnisexNames}
         </List>

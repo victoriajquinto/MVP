@@ -24,10 +24,11 @@ export function getFavorites(){
 }
 
 export function deleteFavorite(name, gender){
-  const method = 'delete';
+  console.log('util/deleteFavorite called with: ', name, gender);
 
-  return axios ({
-
+  return axios.delete('/favorites', {
+    name: name,
+    gender: gender
   }).then((response) => {
 
 

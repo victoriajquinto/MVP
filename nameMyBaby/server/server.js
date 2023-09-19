@@ -106,8 +106,8 @@ app.post('/favorites', async (req, res) => {
     const values = [name, gender];
     console.log(values);
     const queryString = 'INSERT INTO favorites (name, gender) VALUES ($1, $2)';
-    const data = await db.query(queryString, values);
-    res.status(201).send('Record inserted successfully'); //TODO
+    await db.query(queryString, values);
+    res.status(201).send(`${name} inserted successfully`); //TODO
   } catch (error) {
     console.error('Server error posting name to favorites:', error.message);
     res.status(401).send('Server error posting name to favorites');
@@ -120,9 +120,8 @@ app.delete('/favorites', async (req, res) => {
   try {
     const values = [name, gender];
     const queryString = 'DELETE FROM favorites WHERE (name = $1 AND gender = $2)';
-    const data = await db.query(queryString, values);
-    res.status(200).send(data); //TODO
-
+    await db.query(queryString, values);
+    res.status(200).send(`successfully delete ${name}`); //TODO
   } catch (error) {
     console.error('Server error deleting name from favorites:', error.message);
     res.status(401).send('Server error deleting name from favorites');
