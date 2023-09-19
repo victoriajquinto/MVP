@@ -3,10 +3,11 @@ import Drawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import { getFavorites } from '../util/favorites.js';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function Sidebar({ isSidebarOpen, handleCloseSidebar }) {
 
@@ -29,24 +30,44 @@ export default function Sidebar({ isSidebarOpen, handleCloseSidebar }) {
     favorites
     .filter((el) => el.gender === 'm')
     .map(boy => {return (
-      <ListItem key={boy.name}>
+      <ListItem
+        key={boy.name}
+        secondaryAction={
+          <IconButton edge="end" aria-label="delete">
+            <DeleteIcon />
+          </IconButton>
+        }
+      >
         <Typography variant='body1' color='primary.dark'>{boy.name}</Typography >
       </ListItem>)});
 
   const favoriteGirlNames =
   favorites
   .filter((el) => el.gender === 'f')
-  .map(boy => {return (
-    <ListItem key={boy.name}>
-      <Typography variant='body1' color='primary.dark'>{boy.name}</Typography >
+  .map(girl => {return (
+    <ListItem
+      key={girl.name}
+      secondaryAction={
+        <IconButton edge="end" aria-label="delete">
+          <DeleteIcon />
+        </IconButton>
+    }>
+      <Typography variant='body1' color='primary.dark'>{girl.name}</Typography >
     </ListItem>)});
 
   const favoriteUnisexNames =
   favorites
   .filter((el) => el.gender === 'mf')
-  .map(boy => {return (
-    <ListItem key={boy.name}>
-      <Typography variant='body1' color='primary.dark'>{boy.name}</Typography >
+  .map(unisex => {return (
+    <ListItem
+      key={unisex.name}
+      secondaryAction={
+        <IconButton edge="end" aria-label="delete">
+          <DeleteIcon />
+        </IconButton>
+      }
+    >
+      <Typography variant='body1' color='primary.dark'>{unisex.name}</Typography >
     </ListItem>)});
 
 
