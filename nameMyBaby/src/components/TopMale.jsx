@@ -26,7 +26,7 @@ export default function TopMale() {
     fetchData();
   }, [year]);
 
-  let list = data.map((object, index) => {return (<ListItem><Typography variant='body1' color="#524434">{index+1}. {object.name}</Typography ></ListItem>)});
+  let list = data.map((object, index) => {return (<ListItem key={object.name}><Typography variant='body1' color="#524434">{index+1}. {object.name}</Typography ></ListItem>)});
 
   return(
     <Box sx={{
