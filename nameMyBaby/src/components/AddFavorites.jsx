@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Dialog, DialogTitle, DialogContent, Select, MenuItem, FormControl, InputLabel, IconButton, DialogActions, Grid } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, Select, MenuItem, FormControl, InputLabel, IconButton, DialogActions, Grid, Typography, Box } from '@mui/material';
 import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined';
 import handleFetchRandomName from '../state/Name/nameActions.js';
 import { useDispatch, useSelector } from 'react-redux';
@@ -25,21 +25,21 @@ export default function AddFavorites({isFavorite, handleCloseAddFavorites}) {
       <Grid container spacing={1}>
         <Grid>
           <DialogTitle>
-          Select a Gender
+          Add to Favorites
           </DialogTitle>
         </Grid>
         <Grid>
           <DialogActions>
-          <IconButton onClick={handleCloseAddFavorites} >
-            <HighlightOffOutlinedIcon />
-          </IconButton>
-        </DialogActions>
+            <IconButton onClick={handleCloseAddFavorites} >
+              <HighlightOffOutlinedIcon />
+            </IconButton>
+          </DialogActions>
         </Grid>
       </Grid>
 
       <DialogContent>
         <FormControl fullWidth>
-          <InputLabel id='gender'>Gender</InputLabel>
+          <InputLabel id='select a gender'>Gender</InputLabel>
           <Select
             labelId='gender-select'
             value='gender'

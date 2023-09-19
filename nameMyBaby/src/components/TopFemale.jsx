@@ -41,7 +41,7 @@ export default function TopFemale() {
       color: 'info.main'
     }}>
       <Typography variant='h6'>
-        Top US 10 Girl Names of
+        Top 10 U.S. Girl Names of
         <Box sx={{pl: 1, maxWidth: '280px'}}>
           <FormControl>
             <Input id="my-input" aria-describedby="my-helper-text" placeholder='2022' onChange={handleYear}/>
