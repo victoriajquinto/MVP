@@ -87,11 +87,10 @@ app.get('/wiki-given-names', async (req, res) => {
   }
 });
 
-app.get('/favorites/:gender', async (req, res) => {
-  const gender = req.params.gender;
+app.get('/favorites', async (req, res) => {
   try {
-    const queryString = 'SELECT * FROM favorites WHERE gender = $1'
-    const data = await db.query(queryString, gender);
+    const queryString = 'SELECT * FROM favorites'
+    const data = await db.query(queryString);
     res.status(200).send(data);
 
   } catch (error) {
@@ -117,7 +116,7 @@ app.post('/favorites', async (req, res) => {
 
 app.delete('/favorites', async (req, res) => {
   const name = req.params.name; //TODO: check if req.query or req.params
-  const gender = req.parms.gender; //TODO: check if req.query or req.params
+  const gender = req.params.gender; //TODO: check if req.query or req.params
   try {
     const values = [name, gender];
     const queryString = 'DELETE FROM favorites WHERE (name = $1 AND gender = $2)';
