@@ -8,9 +8,10 @@
     "server": "node server/server.js",
     "dev": "vite",
     "build": "vite build",
+    "build:client": "vite build --outDir dist/client",
+    "build:server": "vite build --outDir dist/server --ssr src/entry-server.js",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "test": "vite-jest --watch"
+    "preview": "concurrently \"vite preview\" \"npm run server\""
   },
   "dependencies": {
     "@babel/core": "^7.22.20",
