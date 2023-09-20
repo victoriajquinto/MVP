@@ -64,5 +64,6 @@ data/
 
 #secrets
 .env
+.env.production
 .pem
 
