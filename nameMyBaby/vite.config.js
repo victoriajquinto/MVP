@@ -12,8 +12,7 @@ export default defineConfig({
       '/popularity': 'http://localhost:3000',
       '/favorites': 'http://localhost:3000',
     }
-  },
-
+  }
 });
 
 
