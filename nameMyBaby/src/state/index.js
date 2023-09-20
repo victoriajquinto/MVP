@@ -1,6 +1,6 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import NameReducer from './Name/NameReducer.js';
+import NameReducer from './Name/nameReducer.js';
 import InfoReducer from './Info/infoReducer.js';
 
 const rootReducer = combineReducers({
