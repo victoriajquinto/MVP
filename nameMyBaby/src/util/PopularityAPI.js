@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export default function popularity(name) {
-  const url = `http://127.0.0.1:3000/popularity`;
+  const url = `http://127.0.0.1:5173/popularity`;
   const method = 'get';
 
   return axios({

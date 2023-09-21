@@ -5,7 +5,7 @@ export default async function extractNamesFromHTML(name) {
   const wikipediaURL = `https://en.wikipedia.org/wiki/Victoria_(name)#Given_name`;
 
   try {
-    const response = await await axios.get('http://localhost:3000/wiki-proxy', {
+    const response = await await axios.get('http://localhost:5173/wiki-proxy', {
       params: {
         title: encodedTitle,
       }});

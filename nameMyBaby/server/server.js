@@ -4,18 +4,58 @@ import {db} from './database/db.mjs';
 import cors from 'cors';
 import axios from 'axios';
 import dotenv from 'dotenv';
+import path from 'node:path';
+import { dirname } from 'path';
+import { fileURLToPath } from 'node:url';
+import fs from 'node:fs';
+import { createServer as createViteServer } from 'vite';
 
-dotenv.config();
-
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const app = express();
+
+async function createServer() {
+  const resolve = (p) => path.resolve(__dirname, p)
+
+  app.use((await import('compression')).default())
+  app.use(
+    (await import('serve-static')).default(resolve('dist/client'), {
+      index: false,
+    }),
+  )
+
+  app.use('*', async (req, res) => {
+    try {
+      const url = req.originalUrl;
+
+      let template = fs.readFileSync(resolve('dist/client/index.html'), 'utf-8');
+      // @ts-ignore
+      let render = (await import('./dist/server/entry-server.js')).render;
+
+      const appHtml = render(url);
+      const html = template.replace(`<!--app-html-->`, appHtml)
+
+      res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
+    } catch (e) {
+      console.log(e.stack)
+      res.status(500).end(e.stack)
+    }
+  })
+  return app;
+}
+
+// createServer()
+
+dotenv.config();
 
 app.use(express.json());
 app.use(morgan('dev'));
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
+// app.use(express.static(path.join(__dirname, 'build')));
 
-const port = process.env.PORT;
+
+// const port = process.env.PORT;
 
 //ROUTES
 
@@ -131,6 +171,13 @@ app.delete('/favorites/:name/:gender', async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log("server listening on port", port);
-});
+// app.listen(port, () => {
+//   console.log("server listening on port", port);
+// });
+
+createServer()
+  .then((app) =>
+    app.listen(5173, () => {
+      console.log('listening on http://localhost:5173')
+    }),
+  )

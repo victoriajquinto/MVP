@@ -5,11 +5,13 @@
   "type": "module",
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run dev\"",
-    "server": "node server/server.js",
-    "dev": "vite",
+    "server": "vite",
+    "dev": "node server/server.js",
     "build": "vite build",
+    "build:client": "vite build --outDir dist/client",
+    "build:server": "vite build --outDir dist/server --ssr src/server.js",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "concurrently \"vite preview\" \"npm run server\""
+    "preview": "concurrently \"vite preview\" \"npm run dev\""
   },
   "dependencies": {
     "@babel/core": "^7.22.20",
@@ -20,7 +22,6 @@
     "@mui/icons-material": "^5.14.1",
     "@mui/material": "^5.14.1",
     "axios": "^1.4.0",
-    "babel-jest": "^29.7.0",
     "cheerio": "^1.0.0-rc.12",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",

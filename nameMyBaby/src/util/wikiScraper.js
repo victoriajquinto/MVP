@@ -5,7 +5,7 @@ const baseUrl = 'https://en.wikipedia.org/w/api.php';
 export default async function scrapeWikipediaSummary(pageTitle) {
   try {
     const encodedTitle = encodeURIComponent(pageTitle);
-    const response = await axios.get('http://localhost:3000/wiki-proxy', {
+    const response = await axios.get('http://localhost:5173/wiki-proxy', {
       params: {
         title: encodedTitle,
       },
