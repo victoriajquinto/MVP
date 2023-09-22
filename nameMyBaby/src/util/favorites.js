@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-const baseURL = 'http://127.0.0.1:5173/'
-
 export function postFavorite(name, gender) {
   return axios.post('/favorites', {
     name: name,

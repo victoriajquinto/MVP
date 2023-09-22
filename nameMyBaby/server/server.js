@@ -13,11 +13,14 @@ import { createServer as createViteServer } from 'vite';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const app = express();
+dotenv.config();
+const port = process.env.PORT;
+const MODE = process.env.NODE_ENV;
+
 
 async function createServer() {
-  const resolve = (p) => path.resolve(__dirname, p)
+  const resolve = (p) => path.resolve(__dirname, p);
 
-  app.use((await import('compression')).default())
   app.use(
     (await import('serve-static')).default(resolve('dist/client'), {
       index: false,
@@ -44,18 +47,14 @@ async function createServer() {
   return app;
 }
 
-// createServer()
 
-dotenv.config();
 
 app.use(express.json());
 app.use(morgan('dev'));
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
-// app.use(express.static(path.join(__dirname, 'build')));
 
 
-// const port = process.env.PORT;
 
 //ROUTES
 
@@ -177,7 +176,7 @@ app.delete('/favorites/:name/:gender', async (req, res) => {
 
 createServer()
   .then((app) =>
-    app.listen(5173, () => {
-      console.log('listening on http://localhost:5173')
+    app.listen(port, () => {
+      console.log(`express server live and listening on http://localhost:${port}`)
     }),
   )

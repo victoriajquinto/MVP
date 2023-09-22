@@ -1,7 +1,10 @@
 import axios from 'axios';
+import dotenv from 'dotenv';
+// dotenv.config();
+// const port = process.env.PORT;
 
 export default function popularity(name) {
-  const url = `http://127.0.0.1:5173/popularity`;
+  const url = `http://localhost:5173/popularity`;
   const method = 'get';
 
   return axios({

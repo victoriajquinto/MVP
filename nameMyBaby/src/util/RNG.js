@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-
 export default function RNG(selected) {
   return axios({
     method: 'get',
