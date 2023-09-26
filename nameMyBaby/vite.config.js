@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite';
+import NodePolyfillPlugin from 'vite-plugin-node';
 
 import react from '@vitejs/plugin-react';
 
@@ -7,8 +8,13 @@ export default defineConfig({
   plugins: [react()],
   build: {
     outDir: 'dist'
+  },
+  optimizeDeps: {
+    optimizeDeps: { exclude: ["fsevents"] },
   }
 });
+
+
 
 
   // server: {
