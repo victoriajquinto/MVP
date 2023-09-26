@@ -7,9 +7,10 @@
     "start": "concurrently \"npm run server\" \"npm run dev\"",
     "server": "vite",
     "dev": "node server/server.js",
-    "build": "vite build",
+    "build": "concurrently \"npm run build:client\" \"npm run build:server\"",
     "build:client": "vite build --outDir dist/client",
-    "build:server": "vite build --outDir dist/server --ssr src/server.js",
+    "build:server": "vite build --ssr server/server.js --outDir dist/server",
+    "serve": "NODE_ENV=production node server",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "concurrently \"vite preview\" \"npm run dev\""
   },

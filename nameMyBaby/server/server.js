@@ -4,17 +4,17 @@ import {db} from './database/db.mjs';
 import cors from 'cors';
 import axios from 'axios';
 import dotenv from 'dotenv';
-import path from 'node:path';
+import path from 'path';
 import { dirname } from 'path';
-import { fileURLToPath } from 'node:url';
-import fs from 'node:fs';
+import { fileURLToPath } from 'url';
+import fs from 'fs';
 import { createServer as createViteServer } from 'vite';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 dotenv.config();
-const port = process.env.PORT;
+export const PORT = process.env.PORT;
 const MODE = process.env.NODE_ENV;
 
 

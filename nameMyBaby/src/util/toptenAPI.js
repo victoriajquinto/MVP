@@ -1,11 +1,11 @@
 import axios from 'axios';
+import { PORT } from '../../server/server.js';
 // import dotenv from 'dotenv';
 
 // dotenv.config();
-// const port = process.env.PORT;
 
 export default function sendTopTen(year, gender) {
-  const url = `http://localhost:5173/topten`;
+  const url = `http://localhost:${PORT}/topten`;
   const method = 'get';
 
   return axios({
