@@ -22,7 +22,7 @@ async function createServer() {
   const resolve = (p) => path.resolve(__dirname, p);
 
   app.use(
-    (await import('serve-static')).default(resolve('dist/client'), {
+    (await import('serve-static')).default(resolve('./dist/client'), {
       index: false,
     }),
   )
@@ -31,9 +31,8 @@ async function createServer() {
     try {
       const url = req.originalUrl;
 
-      let template = fs.readFileSync(resolve('dist/client/index.html'), 'utf-8');
-      // @ts-ignore
-      let render = (await import('./dist/server/entry-server.js')).render;
+      let template = fs.readFileSync(resolve('./dist/client/index.html'), 'utf-8');
+      let render = (await import('./dist/server/server.js')).render;
 
       const appHtml = render(url);
       const html = template.replace(`<!--app-html-->`, appHtml)
